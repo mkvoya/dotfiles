@@ -53,6 +53,8 @@ function prompt_battery {
   echo `~/dotfiles/bin/batcharge.py`
 }
 
+integer PSCOL=1
+
 function prompt_steeef_setup {
   setopt LOCAL_OPTIONS
   unsetopt XTRACE KSH_ARRAYS
@@ -114,10 +116,30 @@ function prompt_steeef_setup {
   zstyle ':prezto:module:editor:info:keymap:primary:overwrite' format ' %F{3}♺%f'
   zstyle ':prezto:module:editor:info:keymap:alternate' format ' %B%F{2}❮%F{3}❮%F{1}❮%f%b'
 
+  local -ah ps1
+  local -h date time rs="%b%f%k"
+
+  # Set up the components of the upper line
+  date="%F{1}%D$rs" # Prefer "%{$fg[%D]%}%W$rs" in the USA?
+  time="%F{2}%*$rs"
+
+  # Assemble the new prompt
+  ps1=(
+  "%$[COLUMNS-PSCOL-18]>..>"    # Begin truncation (upper left prompt)
+  "${_prompt_steeef_colors[3]}%n%f"
+  " at ${_prompt_steeef_colors[2]}%m%f"
+  " in ${_prompt_steeef_colors[5]}%~%f"
+  ' ${vcs_info_msg_0_}'
+  "${(l:$COLUMNS::.:: :)}"      # Fill in the space
+  "%<<"                         # End truncation (end upper left prompt)
+  "%$[COLUMNS-PSCOL-15](l. . $date)"
+  "%$[COLUMNS-PSCOL-7](l.. $time)"
+  $'\n'
+  '$python_info[virtualenv]'
+  '${editor_info[keymap]} '
+  )
   # Define prompts.
-  PROMPT="
-${_prompt_steeef_colors[3]}%n%f at ${_prompt_steeef_colors[2]}%m%f in ${_prompt_steeef_colors[5]}%~%f "'${vcs_info_msg_0_}'"
-"'$python_info[virtualenv]''${SSH_TTY:+"%F{9}%n%f%F{7}@%f%F{3}%m%f "}%F{4}${_prompt_sorin_pwd}%(!. %B%F{1}#%f%b.)${editor_info[keymap]} '
+  PROMPT="${(j::)ps1}"
   RPROMPT='[ $? ] $(prompt_online) ${battery_info}'
   SPROMPT='zsh: correct %F{1}%R%f to %F{2}%r%f [nyae]? '
 }
