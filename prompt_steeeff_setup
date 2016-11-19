@@ -35,7 +35,12 @@ function prompt_steeef_precmd {
   fi
 
   # battery
-  battery_info=`~/dotfiles/bin/batcharge.py`
+  if [[ `uname` == 'Darwin' ]]; then
+    battery_info=`~/dotfiles/bin/batcharge.py`
+  else
+    battery_info=''
+  fi
+
 }
 
 function prompt_online {
