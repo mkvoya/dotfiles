@@ -18,7 +18,15 @@ if ! zgen saved; then
 
     # plugins
     #zgen load /path/to/super-secret-private-plugin
+    zgen load zsh-users/zsh-syntax-highlighting
 
     # generate the init script from plugins above
     zgen save
 fi
+
+autoload -U compinit promptinit
+compinit
+promptinit
+#prompt gentoo
+
+zstyle ':completion::complete:*' use-cache 1
