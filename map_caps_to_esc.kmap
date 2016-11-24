@@ -1,0 +1,9 @@
+! Map Caps Lock (keycode 58) to Escape
+! Usage: sudo loadkeys <This File>
+! Useful tools:
+!  loadkeys
+!  dumpkeys
+!  showkey
+keymaps 0-255
+
+keycode 58 = Escape
