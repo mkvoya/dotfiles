@@ -31,3 +31,6 @@ promptinit
 prompt steeeff
 
 zstyle ':completion::complete:*' use-cache 1
+
+# Set key (esp. for Esc) delay to 1ms
+KEYTIMEOUT=1
