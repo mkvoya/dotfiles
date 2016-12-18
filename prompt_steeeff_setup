@@ -130,20 +130,21 @@ function prompt_steeef_setup {
 
   # Assemble the new prompt
   ps1=(
-  "%$[COLUMNS-PSCOL-18]>..>"    # Begin truncation (upper left prompt)
+  '%$[COLUMNS-PSCOL-18]>..>'    # Begin truncation (upper left prompt)
   "${_prompt_steeef_colors[3]}%n%f"
   " at ${_prompt_steeef_colors[2]}%m%f"
   " in ${_prompt_steeef_colors[5]}%~%f"
   ' ${vcs_info_msg_0_}'
-  "${(l:$COLUMNS::.:: :)}"      # Fill in the space
+  '${(l:$COLUMNS::.:: :)}'      # Fill in the space
   "%<<"                         # End truncation (end upper left prompt)
-  "%$[COLUMNS-PSCOL-15](l. . $date)"
-  "%$[COLUMNS-PSCOL-7](l.. $time)"
+  '%$[COLUMNS-PSCOL-15](l. . ' "$date)"
+  '%$[COLUMNS-PSCOL-7](l.. ' "$time)"
   $'\n'
   '$python_info[virtualenv]'
   '${editor_info[keymap]} '
   )
   # Define prompts.
+  setopt promptsubst
   PROMPT="${(j::)ps1}"
   RPROMPT='[ $? ] $(prompt_online) ${battery_info}'
   SPROMPT='zsh: correct %F{1}%R%f to %F{2}%r%f [nyae]? '
