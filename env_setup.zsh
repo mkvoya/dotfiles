@@ -8,12 +8,16 @@ pwd=${HOME}/dotfiles
 git clone https://github.com/tarjoilija/zgen.git "${HOME}/.zgen"
 # get tpm
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+# get Vundle
+git clone https://github.com/VundleVim/Vundle.vim ~/.vim/bundle/Vundle.vim
 
 # links
 ln -s ${HOME}/dotfiles/zshrc ~/.zshrc
 source ~/.zshrc
 ln -s ~/dotfiles/tmux.conf ~/.tmux.conf
+ln -s ~/dotfiles/vimrc ~/.vimrc
 ln -s ~/dotfiles/prompt_steeeff_setup ~/.zgen/sorin-ionescu/prezto-master/modules/prompt/functions/prompt_steeeff_setup 
+
 
 function check {
   # Symlink online-check.sh
