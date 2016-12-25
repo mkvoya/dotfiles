@@ -1,3 +1,4 @@
+" Configuration file for vim
 
 " Normally we use vim-extensions. If you want true vi-compatibility
 " remove change the following statements
@@ -35,6 +36,7 @@ Plugin 'drmikehenry/vim-fontsize'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'pangloss/vim-javascript'
 Plugin 'plasticboy/vim-markdown'
+Plugin 'dzeban/vim-log-syntax'
 
 "+coding enhencement
 Plugin 'majutsushi/tagbar'
@@ -61,10 +63,10 @@ Plugin 'vivien/vim-linux-coding-style'
 Plugin 'jceb/vim-orgmode'
 
 Plugin 'airblade/vim-gitgutter'
-
 Plugin 'ctrlpvim/ctrlp.vim'
 
 " All of your Plugins must be added before the following line
+"
 call vundle#end()            " required
 filetype plugin indent on    " required
 
@@ -141,7 +143,8 @@ let g:EasyMotion_use_upper = 1
  " Smartsign (type `3` and match `3`&`#`)
  let g:EasyMotion_use_smartsign_us = 1
 
-let g:syntastic_c_include_dirs = ['/home/dmk/kernels/linux-4.5.2/include/']
+"syntastic config
+let g:syntastic_c_include_dirs = ['/lib/modules/$(shell uname -r)/build/include', '/lib/modules/4.5.2/build/include']
 let g:syntastic_c_check_header = 1
 set bg=light
 
