@@ -17,7 +17,8 @@ source ~/.zshrc
 ln -s ~/dotfiles/tmux.conf ~/.tmux.conf
 ln -s ~/dotfiles/vimrc ~/.vimrc
 ln -s ~/dotfiles/prompt_steeeff_setup ~/.zgen/sorin-ionescu/prezto-master/modules/prompt/functions/prompt_steeeff_setup 
-
+mkdir -p ~/.vim/colors
+ln -s ~/dotfiles/CandyPaperLight.vim ~/.vim/colors/CandyPaperLight.vim
 
 function check {
   # Symlink online-check.sh
