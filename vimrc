@@ -35,6 +35,7 @@ Plugin 'drmikehenry/vim-fontsize'
 " language support
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'pangloss/vim-javascript'
+Plugin 'mxw/vim-jsx'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'dzeban/vim-log-syntax'
 
@@ -63,6 +64,7 @@ Plugin 'vivien/vim-linux-coding-style'
 Plugin 'jceb/vim-orgmode'
 
 Plugin 'airblade/vim-gitgutter'
+Plugin 'vim-scripts/taglist.vim'
 Plugin 'ctrlpvim/ctrlp.vim'
 
 " All of your Plugins must be added before the following line
@@ -74,9 +76,10 @@ filetype plugin indent on    " required
 
 " format
 set nu
-"set ts=4
-"set sw=4
-"set sts=4
+set ts=4
+set sw=4
+set sts=4
+au FileType javascript setl sw=2 sts=2 ts=2
 "set noexpandtab
 set display=lastline
 set laststatus=2
@@ -148,6 +151,8 @@ let g:syntastic_c_include_dirs = ['/lib/modules/$(shell uname -r)/build/include'
 let g:syntastic_c_check_header = 1
 set bg=light
 
+" React jsx
+let g:jsx_ext_required = 0
 colorscheme CandyPaperLight
 "colorscheme 0x7A69_dark
 
