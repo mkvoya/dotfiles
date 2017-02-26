@@ -24,7 +24,7 @@ if ! zgen saved; then
     zgen save
 fi
 
-autoload -U compinit promptinit
+autoload -U compinit promptinit zmv
 compinit
 promptinit
 #prompt gentoo
