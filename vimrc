@@ -59,13 +59,14 @@ Plugin 'tomasr/molokai'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'vim-scripts/sjump.vim'
 Plugin 'PProvost/vim-markdown-jekyll'
-Plugin 'vivien/vim-linux-coding-style'
+Plugin 'mkdong/vim-linux-coding-style'
 
 Plugin 'jceb/vim-orgmode'
 
 Plugin 'airblade/vim-gitgutter'
 Plugin 'vim-scripts/taglist.vim'
 Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'vim-scripts/rainbow_parentheses.vim'
 
 " All of your Plugins must be added before the following line
 "
@@ -79,7 +80,10 @@ set nu
 set ts=4
 set sw=4
 set sts=4
+set expandtab
 au FileType javascript setl sw=2 sts=2 ts=2
+au FileType cpp setl sw=4 sts=4 ts=4 noexpandtab
+au FileType c setl sw=8 sts=8 ts=8 noexpandtab
 "set noexpandtab
 set display=lastline
 set laststatus=2
@@ -97,7 +101,7 @@ set smarttab
 set cindent
 set linebreak
 set shiftround
-set expandtab
+"set expandtab
 "set showbreak=>\ \ \
 
 " search
@@ -149,6 +153,7 @@ let g:EasyMotion_use_upper = 1
 "syntastic config
 let g:syntastic_c_include_dirs = ['/lib/modules/$(shell uname -r)/build/include', '/lib/modules/4.5.2/build/include']
 let g:syntastic_c_check_header = 1
+let g:syntastic_cpp_compiler_options = ' -std=c++11 '
 set bg=light
 
 " React jsx
@@ -189,3 +194,7 @@ command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
 nnoremap \ :Ag<SPACE>
 
 hi CursorLine ctermbg=8
+"au VimEnter * RainbowParenthesesToggle
+"au Syntax * RainbowParenthesesLoadRound
+"au Syntax * RainbowParenthesesLoadSquare
+"au Syntax * RainbowParenthesesLoadBraces
