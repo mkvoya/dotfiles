@@ -1,4 +1,4 @@
-
+-- Config for hammerspoon
 
 masterkey = {"alt"}
 slavekey = {"alt", "shift"}
@@ -106,4 +106,10 @@ hs.hotkey.bind(slavekey, "R", function()
     f.w = max.w * 2 / 3
     f.h = max.h * 2 / 3
     win:setFrame(f)
+end)
+
+hs.hotkey.bind(slavekey, "S", function()
+    local win = hs.window.focusedWindow()
+    local nextScreen = win:screen():next()
+    win:moveToScreen(nextScreen)
 end)
