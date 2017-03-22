@@ -77,6 +77,22 @@ bindkey -M vicmd '?' history-incremental-pattern-search-forward
 bindkey -M viins '^R' history-incremental-pattern-search-backward
 bindkey -M viins '^F' history-incremental-pattern-search-forward
 
+if [[ `uname` == 'Darwin' ]]; then
 
-export STARDICT_DATA_DIR=~/.stardict-data
-alias def="/usr/bin/sdcv"
+    export PATH="/usr/local/sbin:$PATH"
+
+    # stardict
+    export STARDICT_DATA_DIR=~/.stardict-data
+    alias def="/usr/bin/sdcv"
+
+    # flex
+    export PATH="/usr/local/opt/flex/bin:$PATH"
+    export CPATH="/usr/local/opt/flex/include:$CPATH"
+    #export LIBRARY_PATH="/usr/local/opt/lib:$LIBRARY_PATH"
+    #export LD_LIBRARY_PATH="/usr/local/lib/opt/lib:$LD_LIBRARY_PATH"
+    #export SPARKLE_FRAMEWORK="/Applications/Sparkle\ Test\ App.app/Contents/Frameworks/Sparkle.framework/"
+
+    eval $(/usr/libexec/path_helper -s)
+
+    alias emacs="/Applications/Emacs.app/Contents/MacOS/Emacs -nw"
+fi
