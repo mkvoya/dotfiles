@@ -95,4 +95,12 @@ if [[ `uname` == 'Darwin' ]]; then
     eval $(/usr/libexec/path_helper -s)
 
     alias emacs="/Applications/Emacs.app/Contents/MacOS/Emacs -nw"
+    export EDITOR="/Applications/Emacs.app/Contents/MacOS/Emacs -nw"
+
+    export PATH="/usr/local/opt/icu4c/bin:$PATH"
+    export PATH="/usr/local/opt/icu4c/sbin:$PATH"
+    export DYLD_LIBRARY_PATH="/usr/local/opt/icu4c/lib:$DYLD_LIBRARY_PATH"
+
+else
+    export EDITOR=emacs
 fi
