@@ -212,3 +212,8 @@ let g:netrw_altv=1
 let g:netrw_liststyle=3 "tree view
 "let g:netrw_list_hide=netrw_gitignore#Hide()
 "let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
+
+"let g:linuxsty_patterns = []
+"set cinoptions=N-st100
+set cindent
+set cinoptions=:0,l1,t0,g0,(0,N-s
