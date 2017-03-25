@@ -276,22 +276,29 @@
  ;; If there is more than one, they won't work right.
  )
 
+;;; FONT
+;;;;;;;;; DO NOT WORK FOR CLI
 ;;;;; INSTALL FILES
 ;(call-process "git" nil t nil "clone" "https://github.com/powerline/fonts.git" "/tmp/fonts")
 ;(call-process "ls" nil t nil "/tmp/fonts")
 ;(call-process "/tmp/fonts/install.sh" nil t)
 
-;;; FONT
-(add-to-list 'default-frame-alist '(font . "3270"))
-(add-to-list 'default-frame-alist '(font . "DejaVu Sans Mono for Powerline"))
+;;;;;;(add-to-list 'default-frame-alist '(font . "3270"))
+;;;;;;(add-to-list 'default-frame-alist '(font . "DejaVu Sans Mono for Powerline"))
+;;;;;;
+;;;;;;(set-face-attribute 'default nil :family "DejaVu Sans Mono for Powerline")
+;;;;;;;(set-face-attribute 'default nil :height 94)
+;;;;;;(set-fontset-font "fontset-default" 'unicode "DejaVu Sans Mono for Powerline")
+;;;;;;
+;;;;;;;;
+;;;;;;
+;;;;;;(set-face-attribute 'mode-line nil :family "DejaVu Sans Mono for Powerline")
+;;;;;;(set-face-attribute 'mode-line-inactive nil :family "DejaVu Sans Mono for Powerline")
+;;;;;;(set-face-attribute 'powerline-inactive1 nil :family "DejaVu Sans Mono for Powerline")
+;;;;;;(set-face-attribute 'powerline-active1 nil :family "DejaVu Sans Mono for Powerline")
 
-(set-face-attribute 'default nil :family "DejaVu Sans Mono for Powerline")
-;(set-face-attribute 'default nil :height 94)
-(set-fontset-font "fontset-default" 'unicode "DejaVu Sans Mono for Powerline")
 
-;;
+(setq powerline-default-separator 'utf-8)
+(setq powerline-utf-8-separator-left #x27bd)
+(setq powerline-utf-8-separator-right #x2b05)
 
-(set-face-attribute 'mode-line nil :family "DejaVu Sans Mono for Powerline")
-(set-face-attribute 'mode-line-inactive nil :family "DejaVu Sans Mono for Powerline")
-(set-face-attribute 'powerline-inactive1 nil :family "DejaVu Sans Mono for Powerline")
-(set-face-attribute 'powerline-active1 nil :family "DejaVu Sans Mono for Powerline")
