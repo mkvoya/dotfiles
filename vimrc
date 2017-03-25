@@ -25,7 +25,8 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'L9'
 
 " browser enhencement
-Plugin 'scrooloose/nerdtree'
+" Use builtin netrw
+"Plugin 'scrooloose/nerdtree'
 "Plugin 'Shougo/vimproc.vim' " use zsh
 
 " UI enhencement
@@ -198,3 +199,16 @@ hi CursorLine ctermbg=8
 "au Syntax * RainbowParenthesesLoadRound
 "au Syntax * RainbowParenthesesLoadSquare
 "au Syntax * RainbowParenthesesLoadBraces
+
+"" No Plugins
+" FINDING FILES
+set path+=**
+set wildmenu
+
+" File broswing
+let g:netrw_banner=0
+let g:netrw_browser_split=4
+let g:netrw_altv=1
+let g:netrw_liststyle=3 "tree view
+"let g:netrw_list_hide=netrw_gitignore#Hide()
+"let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
