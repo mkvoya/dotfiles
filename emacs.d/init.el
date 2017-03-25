@@ -307,3 +307,13 @@
 (setq powerline-utf-8-separator-left #x27bd)
 (setq powerline-utf-8-separator-right #x2b05)
 
+(use-package vimish-fold
+  :ensure t
+  :defer t)
+;(vimish-fold-global-mode 1)
+(use-package evil-vimish-fold
+  :ensure t
+  :defer t)
+;(evil-vimish-fold-mode 1)
+
+(add-hook 'prog-mode-hook #'hs-minor-mode)
