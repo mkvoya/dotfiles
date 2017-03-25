@@ -59,12 +59,12 @@
 ; lazy answer
 (fset 'yes-or-no-p 'y-or-n-p)
 
-;minibuffer editing
-(use-package miniedit
-  :ensure t
-  :defer t
-  :commands minibuffer-edit
-  :init (miniedit-install))
+;;minibuffer editing
+;(use-package miniedit
+;  :ensure t
+;  :defer t
+;  :commands minibuffer-edit
+;  :init (miniedit-install))
 
 ;; light-on-dark color scheme
 ;(defadvice color-theme-alist (around sacha activate)
@@ -162,6 +162,41 @@
 
 (load-theme 'manoj-dark)
 
+(setq c-default-style "linux"
+      c-basic-offset 8)
+(setq-default c-basic-offset 8
+	      tab-width 8
+	      indent-tabs-mode t)
+
+(use-package whitespace
+  :ensure t)
+(setq whitespace-style '(trailing tabs newline tab-mark newline-mark))
+(global-whitespace-mode t)
+
+
+(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
+
+
+; style I want to use in c++ mode
+(c-add-style "my-style"
+	     '("stroustrup"
+	       (c-basic-offset . 4)            ; indent by four spaces
+	       (tab-width . 4)
+	       (indent-tabs-mode . t)        ; use tabs
+	       (c-offsets-alist . ((inline-open . 0)  ; custom indentation rules
+				   (brace-list-open . 0)
+				   (innamespace . [0])
+				   (statement-case-open . +)))))
+;(defun my-c-setup ()
+;  (c-set-offset 'innamespace [0]))
+;(add-hook 'c++-mode-hook 'my-c-setup)
+
+(defun my-c++-mode-hook ()
+  (c-set-style "my-style"))        ; use my-style defined above
+  ;(auto-fill-mode)
+  ;(c-toggle-auto-hungry-state 1))
+
+(add-hook 'c++-mode-hook 'my-c++-mode-hook)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
