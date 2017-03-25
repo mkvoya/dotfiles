@@ -170,9 +170,14 @@
 	      tab-width 8
 	      indent-tabs-mode t)
 
+; Whitespace, check: http://ergoemacs.org/emacs/whitespace-mode.html
 (use-package whitespace
   :ensure t)
 (setq whitespace-style '(trailing tabs newline tab-mark newline-mark))
+(setq whitespace-display-mappings
+      '(
+	(newline-mark 10 [8617 10])
+	(tab-mark 9 [8594 9] [92 9])))
 (global-whitespace-mode t)
 
 
