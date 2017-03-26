@@ -317,3 +317,20 @@
 ;(evil-vimish-fold-mode 1)
 
 (add-hook 'prog-mode-hook #'hs-minor-mode)
+
+(global-hl-line-mode 1)
+;(set-face-background 'hl-line "#3e4446")
+;(set-face-foreground 'highlight nil)
+(set-face-foreground 'hl-line nil)
+
+;;(use-package column-marker
+;;  :ensure t
+;;  :defer t)
+;;
+;;(add-hook 'prog-mode-hook (lambda () (interactive) (column-marker-1 80)))
+
+(use-package column-enforce-mode
+  :ensure t
+  :defer t)
+(add-hook 'prog-mode-hook 'column-enforce-mode)
+(setq column-enforce-comments nil)
