@@ -334,3 +334,6 @@
   :defer t)
 (add-hook 'prog-mode-hook 'column-enforce-mode)
 (setq column-enforce-comments nil)
+
+; ensure moues
+(xterm-mouse-mode t)
