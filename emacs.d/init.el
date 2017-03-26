@@ -173,11 +173,13 @@
 ; Whitespace, check: http://ergoemacs.org/emacs/whitespace-mode.html
 (use-package whitespace
   :ensure t)
-(setq whitespace-style '(trailing tabs newline tab-mark newline-mark))
+(setq whitespace-style '(face trailing tabs newline tab-mark newline-mark lines-tail))
 (setq whitespace-display-mappings
       '(
 	(newline-mark 10 [8617 10])
 	(tab-mark 9 [8594 9] [92 9])))
+(set-face-background 'whitespace-trailing "#ffaf5f")
+(set-face-background 'trailing-whitespace "#ffaf5f")
 (global-whitespace-mode t)
 
 
@@ -323,17 +325,26 @@
 ;(set-face-foreground 'highlight nil)
 (set-face-foreground 'hl-line nil)
 
+;;;;; Use whitespace instead
 ;;(use-package column-marker
 ;;  :ensure t
 ;;  :defer t)
 ;;
 ;;(add-hook 'prog-mode-hook (lambda () (interactive) (column-marker-1 80)))
-
-(use-package column-enforce-mode
-  :ensure t
-  :defer t)
-(add-hook 'prog-mode-hook 'column-enforce-mode)
-(setq column-enforce-comments nil)
+;(use-package column-enforce-mode
+;  :ensure t
+;  :defer t)
+;(add-hook 'prog-mode-hook 'column-enforce-mode)
+;(setq column-enforce-comments nil)
 
 ; ensure moues
 (xterm-mouse-mode t)
+
+(use-package modern-cpp-font-lock
+  :ensure t
+  :defer t)
+(add-hook 'c++-mode-hook #'modern-c++-font-lock-mode)
+
+(add-hook 'prog-mode-hook
+	  (lambda () (add-to-list 'write-file-functions
+				  'delete-trailing-whitespace)))
