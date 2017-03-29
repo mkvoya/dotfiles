@@ -249,7 +249,7 @@
  '(magit-diff-use-overlays nil)
  '(package-selected-packages
    (quote
-    (powerline use-package miniedit guide-key evil company color-theme-solarized)))
+    (flycheck-status-emoji flycheck-color-mode-line flycheck evil-easymotion avy modern-cpp-font-lock evil-vimish-fold vimish-fold powerline use-package miniedit guide-key evil company color-theme-solarized)))
  '(pos-tip-background-color "#A6E22E")
  '(pos-tip-foreground-color "#272822")
  '(vc-annotate-background nil)
@@ -348,3 +348,56 @@
 (add-hook 'prog-mode-hook
 	  (lambda () (add-to-list 'write-file-functions
 				  'delete-trailing-whitespace)))
+
+(use-package neotree
+  :ensure t
+  :defer t)
+
+(use-package evil-surround
+  :ensure t
+  :defer t)
+(global-evil-surround-mode 1)
+
+(use-package evil-numbers
+  :ensure t
+  :defer t)
+(define-key evil-normal-state-map (kbd "C-c +") 'evil-numbers/inc-at-pt)
+(define-key evil-normal-state-map (kbd "C-c -") 'evil-numbers/dec-at-pt)
+
+; (use-package perspective
+;   :ensure t
+;   :defer t)
+; (persp-mode)
+
+(use-package org-evil
+  :ensure t
+  :defer t)
+
+;(use-package avy
+;  :ensure t
+;  :defer t)
+
+(evilem-default-keybindings "SPC")
+(use-package evil-easymotion
+  :ensure t
+  :defer t)
+
+(use-package flycheck
+  :ensure t
+  :defer t
+  :init (global-flycheck-mode))
+
+(add-hook 'after-init-hook #'global-flycheck-mode)
+
+(setq flycheck-indication-mode 'left-fringe)
+
+(use-package flycheck-color-mode-line
+  :ensure t
+  :defer t)
+
+(eval-after-load "flycheck"
+  '(add-hook 'flycheck-mode-hook 'flycheck-color-mode-line-mode))
+
+(use-package flycheck-status-emoji
+  :ensure t
+  :defer t)
