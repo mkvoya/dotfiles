@@ -26,7 +26,7 @@ Plugin 'L9'
 
 " browser enhencement
 " Use builtin netrw
-"Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/nerdtree'
 "Plugin 'Shougo/vimproc.vim' " use zsh
 
 " UI enhencement
@@ -68,6 +68,7 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'vim-scripts/taglist.vim'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'vim-scripts/rainbow_parentheses.vim'
+Plugin 'osyo-manga/vim-over'
 
 " All of your Plugins must be added before the following line
 "
@@ -206,10 +207,10 @@ set path+=**
 set wildmenu
 
 " File broswing
-let g:netrw_banner=0
-let g:netrw_browser_split=4
-let g:netrw_altv=1
-let g:netrw_liststyle=3 "tree view
+""" let g:netrw_banner=0
+""" let g:netrw_browser_split=4
+""" let g:netrw_altv=1
+""" let g:netrw_liststyle=3 "tree view
 "let g:netrw_list_hide=netrw_gitignore#Hide()
 "let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
 
@@ -217,3 +218,4 @@ let g:netrw_liststyle=3 "tree view
 "set cinoptions=N-st100
 set cindent
 set cinoptions=:0,l1,t0,g0,(0,N-s
+
