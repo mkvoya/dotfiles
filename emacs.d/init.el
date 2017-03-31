@@ -19,19 +19,37 @@
   :ensure t
   :init
   (setq evil-want-C-u-scroll t)
+  (setq evil-toggle-key "C-`")
   :config
   (evil-mode 1))
+
+(add-hook 'c-mode-common-hook #'(lambda () (modify-syntax-entry ?_ "w")))
+(use-package evil-ediff
+  :ensure t
+  :defer t)
+
+;;; EVIL
+(setq evil-motion-state-modes
+      (append evil-emacs-state-modes evil-motion-state-modes))
+(setq evil-emacs-state-modes nil)
 
 ;;; Library
 (use-package dash
   :defer t)
 
 ;;; Backups
-(setq backup-directory-alist '(("." . "~/.emacs.d/backups")))
+(setq
+ backup-by-copying t
+ backup-directory-alist '(("." . "~/.emacs.d/backups"))
+ delete-old-versions t
+ kept-new-versions 6
+ kept-old-versions 2
+ version-control t
+ vc-make-backup-files t)
+;(setq backup-directory-alist '(("." . "~/.emacs.d/backups")))
 ;(setq delete-old-versiojns -1)
 ;(setq version-control t)
-;(setq vc-make-backup-files t)
-;(setq auto-save-file-name-transforms '((".*" "~/emacs.d/auto-save-list/" t)))
+(setq auto-save-file-name-transforms '((".*" "~/.emacs.d/auto-save-list/" t)))
 
 ;;; History
 (setq savehist-file "~/.emacs.d/savehist")
@@ -47,14 +65,18 @@
 (menu-bar-mode -1) ; close menu bar
 
 ; Winner mode
-(use-package winner :defer t)
+;(use-package winner :defer t)
+(if (fboundp 'winner-mode)
+    (progn
+      (winner-mode 1)
+      (message "Winner-mode enabled"))
+  (message "No Winner-Mode, Skip"))
 
 ; Sentence
-(setq sentence-end-double-space nil)
+(setq sentence-end-double-space nil) ; Use only one space to end a sentence
 
 ; Mode line format
-(use-package smart-mode-line
-  :defer t)
+(use-package smart-mode-line :defer t)
 
 ; lazy answer
 (fset 'yes-or-no-p 'y-or-n-p)
@@ -97,14 +119,13 @@
     (setq undo-tree-visualizer-timestamps t)
     (setq undo-tree-visualizer-diff t)))
 
-(use-package guide-key
+;; which-key is a fork of guide-key
+(use-package which-key
   :ensure t
   :defer t
-  :diminish guide-key-mode
   :config
-  (progn
-    (setq guide-key/guide-key-sequence '("C-x r" "C-x 4" "C-c"))
-    (guide-key-mode 1))) ; Enable guide-key-mode
+  (which-key-mode)
+  (which-key-setup-minibuffer))
 
 ; UTF-8
 (prefer-coding-system 'utf-8)
@@ -122,34 +143,32 @@
 (set-default-coding-systems 'utf-8)
 
 ; Clean up spaces
-(bind-key "M-SPC" 'cycle-spacing)
+;(bind-key "M-SPC" 'cycle-spacing)
 
 ; Show column number
 (column-number-mode 1)
+
+(use-package yasnippet
+  :ensure t
+  :defer t
+  :config
+  (yas-global-mode 1))
 
 ; Autocomplete
 (use-package company
   :ensure t
   :defer t
-  :config (add-hook 'prog-mode-hook 'company-mode))
+  :config
+  ;(add-hook 'prog-mode-hook 'company-mode)
+  (setq company-dabbrev-downcase nil
+	company-show-numbers t
+	company-minimum-prefix-length 2)
+  (setq company-tooltip-flip-when-above t)
+  (global-company-mode 1)
+  ;(company-auctex-init)
+  ;;(company-statistics-mode 1)
+  )
 
-
-;;; EVIL
-(setq evil-motion-state-modes (append evil-emacs-state-modes evil-motion-state-modes))
-(setq evil-emacs-state-modes nil)
-
-;;; change mode-line color by evil state
-;(lexical-let ((default-color (cons (face-background 'mode-line)
-;				   (face-foreground 'mode-line))))
-;  (add-hook 'post-command-hook
-;	    (lambda ()
-;	      (let ((color (cond ((minibufferp) default-color)
-;				 ((evil-insert-state-p) '("#e80000" . "#ffffff"))
-;				 ((evil-emacs-state-p) '("#444488" . "#ffffff"))
-;				 ((buffer-modified-p) '("#006fa0" . "#ffffff"))
-;				 (t default-color))))
-;		(set-face-background 'mode-line (car color))
-;		(set-face-foreground 'mode-line (cdr color))))))
 
 
 ; Powerline
@@ -170,21 +189,19 @@
 	      tab-width 8
 	      indent-tabs-mode t)
 
-; Whitespace, check: http://ergoemacs.org/emacs/whitespace-mode.html
-(use-package whitespace
-  :ensure t)
-(setq whitespace-style '(face trailing tabs newline tab-mark newline-mark lines-tail))
+; Whitespace[built-in], check: http://ergoemacs.org/emacs/whitespace-mode.html
+(use-package whitespace)
+(setq whitespace-style
+'(face trailing tabs newline tab-mark newline-mark lines-tail))
 (setq whitespace-display-mappings
-      '(
-	(newline-mark 10 [8617 10])
-	(tab-mark 9 [8594 9] [92 9])))
-(set-face-background 'whitespace-trailing "#ffaf5f")
+'((newline-mark 10 [8617 10])
+  (tab-mark 9 [8594 9] [92 9])))
 (set-face-background 'trailing-whitespace "#ffaf5f")
+(set-face-background 'whitespace-trailing "#ffaf5f")
 (global-whitespace-mode t)
 
 
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
-
 
 ; style I want to use in c++ mode
 (c-add-style "my-style"
@@ -196,21 +213,29 @@
 				   (brace-list-open . 0)
 				   (innamespace . [0])
 				   (statement-case-open . +)))))
-;(defun my-c-setup ()
-;  (c-set-offset 'innamespace [0]))
-;(add-hook 'c++-mode-hook 'my-c-setup)
 
 (defun my-c++-mode-hook ()
   (c-set-style "my-style"))        ; use my-style defined above
-  ;(auto-fill-mode)
-  ;(c-toggle-auto-hungry-state 1))
 
 (add-hook 'c++-mode-hook 'my-c++-mode-hook)
 
 
 (use-package monokai-theme
-  :ensure t)
-(load-theme 'monokai t)
+  :ensure t
+  :config
+  (load-theme 'monokai t)
+  (setq monokai-background "#080C14")
+  (message "HI"))
+(use-package grandshell-theme
+  :ensure t
+  :config
+;  (load-theme 'grandshell t)
+  )
+(use-package alect-themes
+  :ensure t
+  :config
+;  (load-theme 'alect-black t)
+  )
 
 ;(use-package spaceline-config
 ;  :ensure t
@@ -313,6 +338,7 @@
   :ensure t
   :defer t)
 ;(vimish-fold-global-mode 1)
+
 (use-package evil-vimish-fold
   :ensure t
   :defer t)
@@ -345,9 +371,9 @@
   :defer t)
 (add-hook 'c++-mode-hook #'modern-c++-font-lock-mode)
 
-(add-hook 'prog-mode-hook
-	  (lambda () (add-to-list 'write-file-functions
-				  'delete-trailing-whitespace)))
+;(add-hook 'prog-mode-hook
+;	  (lambda () (add-to-list 'write-file-functions
+;				  'delete-trailing-whitespace)))
 
 (use-package neotree
   :ensure t
@@ -377,10 +403,12 @@
 ;  :ensure t
 ;  :defer t)
 
-(evilem-default-keybindings "SPC")
 (use-package evil-easymotion
   :ensure t
-  :defer t)
+;  :defer t
+  :config
+  (evilem-default-keybindings "SPC"))
+
 
 (use-package flycheck
   :ensure t
@@ -401,3 +429,44 @@
 (use-package flycheck-status-emoji
   :ensure t
   :defer t)
+
+(use-package helm
+  :ensure t
+  :defer t
+  :config
+  (helm-mode 1))
+;(use-package helm-config
+;  :ensure t
+;  :defer t)
+(use-package helm-etags-plus
+  :bind
+  ("M-." . helm-etags-plus-select)
+  :ensure t
+  :defer t)
+
+(use-package vdiff
+  :ensure t
+  :defer t)
+(evil-define-key 'normal vdiff-mode-map "," vdiff-mode-prefix-map)
+(evil-define-minor-mode-key 'normal 'vdiff-mode "]c" 'vdiff-next-hunk)
+(evil-define-minor-mode-key 'normal 'vdiff-mode "[c" 'vdiff-previous-hunk)
+(evil-define-minor-mode-key 'normal 'vdiff-mode "zc" 'vdiff-close-fold)
+(evil-define-minor-mode-key 'normal 'vdiff-mode "zM" 'vdiff-close-all-folds)
+(evil-define-minor-mode-key 'normal 'vdiff-mode "zo" 'vdiff-open-fold)
+(evil-define-minor-mode-key 'normal 'vdiff-mode "zR" 'vdiff-open-all-folds)
+(evil-define-minor-mode-key 'motion 'vdiff-mode "go" 'vdiff-receive-changes)
+(evil-define-minor-mode-key 'motion 'vdiff-mode "gp" 'vdiff-send-changes)
+
+
+;; scroll one line at a time (less "jumpy" than defaults)
+(setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
+(setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
+(setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
+(setq scroll-step 1) ;; keyboard scroll one line at a time
+
+;(use-package icicles
+;  :ensure t)
+;(use-package etags-select
+;  :ensure t)
+
+(setq evil-esc-delay 0)
