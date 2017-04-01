@@ -42,7 +42,6 @@ Plugin 'dzeban/vim-log-syntax'
 
 "+coding enhencement
 Plugin 'majutsushi/tagbar'
-Plugin 'scrooloose/syntastic'
 Plugin 'godlygeek/tabular'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'tpope/vim-surround'
@@ -69,6 +68,8 @@ Plugin 'vim-scripts/taglist.vim'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'vim-scripts/rainbow_parentheses.vim'
 Plugin 'osyo-manga/vim-over'
+Plugin 'crater2150/vim-theme-chroma'
+Plugin 'vim-syntastic/syntastic'
 
 " All of your Plugins must be added before the following line
 "
@@ -156,12 +157,13 @@ let g:EasyMotion_use_upper = 1
 let g:syntastic_c_include_dirs = ['/lib/modules/$(shell uname -r)/build/include', '/lib/modules/4.5.2/build/include']
 let g:syntastic_c_check_header = 1
 let g:syntastic_cpp_compiler_options = ' -std=c++11 '
-set bg=light
 
 " React jsx
 let g:jsx_ext_required = 0
 colorscheme CandyPaperLight
 "colorscheme 0x7A69_dark
+colorscheme chroma
+set bg=dark
 
 " ctrl_p
 set runtimepath^=~/.vim/bundle/ctrlp.vim
@@ -218,4 +220,15 @@ set wildmenu
 "set cinoptions=N-st100
 set cindent
 set cinoptions=:0,l1,t0,g0,(0,N-s
+
+
+"""""" Syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 
