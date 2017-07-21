@@ -18,6 +18,23 @@
 (require 'diminish)
 (require 'bind-key)
 
+(use-package evil
+  :ensure t
+  :init
+  (setq evil-want-C-u-scroll t)
+  (setq evil-toggle-key "C-`")
+  :config
+  (evil-mode 1))
+
+(add-hook 'c-mode-common-hook #'(lambda () (modify-syntax-entry ?_ "w")))
+(use-package evil-ediff
+  :ensure t
+  :defer t)
+
+;;; EVIL
+(setq evil-motion-state-modes
+      (append evil-emacs-state-modes evil-motion-state-modes))
+(setq evil-emacs-state-modes nil)
 
 ;;; Library
 (use-package dash
@@ -320,6 +337,16 @@
 (setq powerline-utf-8-separator-left #x27bd)
 (setq powerline-utf-8-separator-right #x2b05)
 
+(use-package vimish-fold
+  :ensure t
+  :defer t)
+;(vimish-fold-global-mode 1)
+
+(use-package evil-vimish-fold
+  :ensure t
+  :defer t)
+;(evil-vimish-fold-mode 1)
+
 (add-hook 'prog-mode-hook #'hs-minor-mode)
 
 (global-hl-line-mode 1)
@@ -355,14 +382,35 @@
   :ensure t
   :defer t)
 
+(use-package evil-surround
+  :ensure t
+  :defer t)
+(global-evil-surround-mode 1)
+
+(use-package evil-numbers
+  :ensure t
+  :defer t)
+(define-key evil-normal-state-map (kbd "C-c +") 'evil-numbers/inc-at-pt)
+(define-key evil-normal-state-map (kbd "C-c -") 'evil-numbers/dec-at-pt)
+
 ; (use-package perspective
 ;   :ensure t
 ;   :defer t)
 ; (persp-mode)
 
+(use-package org-evil
+  :ensure t
+  :defer t)
+
 ;(use-package avy
 ;  :ensure t
 ;  :defer t)
+
+(use-package evil-easymotion
+  :ensure t
+;  :defer t
+  :config
+  (evilem-default-keybindings "SPC"))
 
 
 (use-package flycheck
@@ -399,6 +447,19 @@
 ;  :ensure t
 ;  :defer t)
 
+;(use-package vdiff
+;  :ensure t
+;  :defer t)
+(evil-define-key 'normal vdiff-mode-map "," vdiff-mode-prefix-map)
+(evil-define-minor-mode-key 'normal 'vdiff-mode "]c" 'vdiff-next-hunk)
+(evil-define-minor-mode-key 'normal 'vdiff-mode "[c" 'vdiff-previous-hunk)
+(evil-define-minor-mode-key 'normal 'vdiff-mode "zc" 'vdiff-close-fold)
+(evil-define-minor-mode-key 'normal 'vdiff-mode "zM" 'vdiff-close-all-folds)
+(evil-define-minor-mode-key 'normal 'vdiff-mode "zo" 'vdiff-open-fold)
+(evil-define-minor-mode-key 'normal 'vdiff-mode "zR" 'vdiff-open-all-folds)
+(evil-define-minor-mode-key 'motion 'vdiff-mode "go" 'vdiff-receive-changes)
+(evil-define-minor-mode-key 'motion 'vdiff-mode "gp" 'vdiff-send-changes)
+
 
 ;; scroll one line at a time (less "jumpy" than defaults)
 (setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
@@ -410,3 +471,5 @@
 ;  :ensure t)
 ;(use-package etags-select
 ;  :ensure t)
+
+(setq evil-esc-delay 0)
