@@ -72,4 +72,24 @@ export PATH="/Users/mkdong/devtools/fakeroot/bin:$PATH:$HOME/.rvm/bin"
 
 set -o vi
 
+NORM="$(tput setaf 9)"
+RESET="$(tput sgr0)"
+RED="$(tput setaf 1)"
+GREEN="$(tput setaf 2)"
+YELLOW="$(tput setaf 3)"
+MAGENTA="$(tput setaf 5)"
+CYAN="$(tput setaf 6)"
+BOLD="$(tput bold)"
+ORANGE="$(tput setaf 166)"
+PURPLE="$(tput setaf 135)"
+LIMEGREEN="$(tput setaf 118)"
+COLUMNS=$(tput cols)
+COL214=$(tput setaf 214)
 
+bind "set vi-ins-mode-string \ \1${BOLD}${RED}\2❯\1${YELLOW}\2❯\1${GREEN}\2❯"
+bind "set vi-cmd-mode-string \ \1${BOLD}${GREEN}\2❮\1${YELLOW}\2❮\1${RED}\2❮"
+bind 'set show-mode-in-prompt on'
+RIGHT="$(tput cuf 150) DATE"
+
+export PS1="\[${BOLD}${GREEN}\]\u @ \[${COL214}\]\h \[${GREEN}\][\t] >\$?< \[${LIMEGREEN}\]\w .....\[${RESET}\]
+ \[${RESET}\]"
