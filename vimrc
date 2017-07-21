@@ -71,6 +71,9 @@ Plugin 'osyo-manga/vim-over'
 Plugin 'crater2150/vim-theme-chroma'
 Plugin 'vim-syntastic/syntastic'
 
+Plugin 'yosssi/vim-ace'
+Plugin 'fatih/vim-go'
+
 " All of your Plugins must be added before the following line
 "
 call vundle#end()            " required

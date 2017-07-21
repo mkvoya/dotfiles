@@ -1,3 +1,4 @@
+# zmodload zsh/zprof # Only for startup profiling
 # load zgen
 source "${HOME}/.zgen/zgen.zsh"
 
@@ -23,6 +24,7 @@ if ! zgen saved; then
     # generate the init script from plugins above
     zgen save
 fi
+
 
 autoload -U compinit promptinit zmv
 compinit
@@ -100,6 +102,7 @@ if [[ `uname` == 'Darwin' ]]; then
 
     export PATH="/usr/local/opt/icu4c/bin:$PATH"
     export PATH="/usr/local/opt/icu4c/sbin:$PATH"
+    # This export doesn't work due to SIP
     export DYLD_LIBRARY_PATH="/usr/local/opt/icu4c/lib:$DYLD_LIBRARY_PATH"
 
 else
@@ -107,3 +110,9 @@ else
     #alias v=vim
     #alias e=emacs
 fi
+
+export LANG="C"
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="/Users/mkdong/devtools/fakeroot/bin:$PATH:$HOME/.rvm/bin"
+# zprof # for profiling
