@@ -1,5 +1,7 @@
 source ~/dotfiles/gentoo-bashrc
 
+# Safe rm
+alias rm='rm -i'
 # ----------------------
 # Git Aliases
 # ----------------------
