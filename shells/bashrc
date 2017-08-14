@@ -1,4 +1,4 @@
-source ~/dotfiles/gentoo-bashrc
+source ~/dotfiles/shells/gentoo-bashrc
 
 # Safe rm
 alias rm='rm -i'
