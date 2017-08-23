@@ -1,36 +1,42 @@
-# zmodload zsh/zprof # Only for startup profiling
-# load zgen
-source "${HOME}/.zgen/zgen.zsh"
+# Zsh config
 
-# if the init scipt doesn't exist
-if ! zgen saved; then
+# Use vi-mode
+bindkey -v
 
-    echo "Creating a zgen save"
+typeset -g keymap="n/a"
+typeset -g vi_ind=""
+typeset -g viins_ind=""
+typeset -g vicmd_ind=""
 
-    # prezto options
-    zgen prezto editor key-bindings 'vi'
-    zgen prezto prompt theme 'steeeff'
+zle-refresh-prompt() {
+  keymap=${KEYMAP}
+  vi_ind="${${keymap/vicmd/$vicmd_ind}/(main|viins)/$viins_ind}"
+  zle reset-prompt
+}
+zle -N zle-refresh-prompt
 
-    # prezto and modules
-    zgen prezto
-    zgen prezto git
-    zgen prezto command-not-found
-    zgen prezto syntax-highlighting
+zle-keymap-select() {
+  zle zle-refresh-prompt
+}
+zle -N zle-keymap-select
 
-    # plugins
-    #zgen load /path/to/super-secret-private-plugin
-    zgen load zsh-users/zsh-syntax-highlighting
+function zle-line-finish {
+  zle zle-refresh-prompt
+}
+zle -N zle-line-finish
 
-    # generate the init script from plugins above
-    zgen save
-fi
+function zle-line-init {
+  zle zle-refresh-prompt
+}
+zle -N zle-line-init
 
 
-autoload -U compinit promptinit zmv
+autoload -Uz compinit promptinit zmv colors && colors
+setopt promptsubst
 compinit
 promptinit
-#prompt gentoo
-prompt steeeff
+source ~/dotfiles/shells/prompt_tukoo_setup
+#prompt steeeff
 
 zstyle ':completion::complete:*' use-cache 1
 
@@ -65,12 +71,6 @@ alias gstl='git stash list'
 alias gstp='git stash pop'
 alias gstd='git stash drop'
 
-# ----------------------
-# Git Functions
-# ----------------------
-# Git log find by commit message
-function glf() { git log --all --grep="$1"; }
-
 # Search backwards and forwards with a pattern
 bindkey -M vicmd '/' history-incremental-pattern-search-backward
 bindkey -M vicmd '?' history-incremental-pattern-search-forward
@@ -79,40 +79,3 @@ bindkey -M vicmd '?' history-incremental-pattern-search-forward
 bindkey -M viins '^R' history-incremental-pattern-search-backward
 bindkey -M viins '^F' history-incremental-pattern-search-forward
 
-if [[ `uname` == 'Darwin' ]]; then
-
-    export PATH="/usr/local/sbin:$PATH"
-
-    # stardict
-    export STARDICT_DATA_DIR=~/.stardict-data
-    alias def="/usr/bin/sdcv"
-
-    # flex
-    export PATH="/usr/local/opt/flex/bin:$PATH"
-    export CPATH="/usr/local/opt/flex/include:$CPATH"
-    #export LIBRARY_PATH="/usr/local/opt/lib:$LIBRARY_PATH"
-    #export LD_LIBRARY_PATH="/usr/local/lib/opt/lib:$LD_LIBRARY_PATH"
-    #export SPARKLE_FRAMEWORK="/Applications/Sparkle\ Test\ App.app/Contents/Frameworks/Sparkle.framework/"
-
-    eval $(/usr/libexec/path_helper -s)
-
-    alias emacs="/Applications/Emacs.app/Contents/MacOS/Emacs -nw"
-    #export EDITOR="/Applications/Emacs.app/Contents/MacOS/Emacs -nw"
-    export EDITOR=vim
-
-    export PATH="/usr/local/opt/icu4c/bin:$PATH"
-    export PATH="/usr/local/opt/icu4c/sbin:$PATH"
-    # This export doesn't work due to SIP
-    export DYLD_LIBRARY_PATH="/usr/local/opt/icu4c/lib:$DYLD_LIBRARY_PATH"
-
-else
-    export EDITOR=vim
-    #alias v=vim
-    #alias e=emacs
-fi
-
-export LANG="C"
-
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="/Users/mkdong/devtools/fakeroot/bin:$PATH:$HOME/.rvm/bin"
-# zprof # for profiling
