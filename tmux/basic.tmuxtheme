@@ -47,8 +47,8 @@ set -g pane-active-border-bg default
 set -g pane-active-border-fg green
 
 # Pane number indicator
-set -g display-panes-colour default
-set -g display-panes-active-colour default
+set -g display-panes-colour yellow
+set -g display-panes-active-colour green
 
 # Clock mode
 set -g clock-mode-colour red

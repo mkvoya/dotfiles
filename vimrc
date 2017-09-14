@@ -157,7 +157,7 @@ let g:EasyMotion_use_upper = 1
  let g:EasyMotion_use_smartsign_us = 1
 
 "syntastic config
-let g:syntastic_c_include_dirs = ['/lib/modules/$(shell uname -r)/build/include', '/lib/modules/4.5.2/build/include']
+let g:syntastic_c_include_dirs = ['/lib/modules/$(shell uname -r)/build/include', '/lib/modules/4.5.2/build/include', '/usr/src/linux-4.12.8/include/']
 let g:syntastic_c_check_header = 1
 let g:syntastic_cpp_compiler_options = ' -std=c++11 '
 
@@ -231,7 +231,7 @@ set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
 "let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 

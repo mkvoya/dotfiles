@@ -98,21 +98,35 @@ bindkey '^r' history-incremental-search-backward
 
 
 ##### Dirstack from Arch Wiki
-DIRSTACKFILE="$HOME/.cache/zsh/dirs"
-if [[ -f $DIRSTACKFILE ]] && [[ $#dirstack -eq 0 ]]; then
-  dirstack=( ${(f)"$(< $DIRSTACKFILE)"} )
-  [[ -d $dirstack[1] ]] && cd $dirstack[1]
-fi
-chpwd() {
-  print -l $PWD ${(u)dirstack} >$DIRSTACKFILE
-}
+#DIRSTACKFILE="$HOME/.cache/zsh/dirs"
+#if [[ -f $DIRSTACKFILE ]] && [[ $#dirstack -eq 0 ]]; then
+#  dirstack=( ${(f)"$(< $DIRSTACKFILE)"} )
+#  [[ -d $dirstack[1] ]] && cd $dirstack[1]
+#fi
+#chpwd() {
+#  print -l $PWD ${(u)dirstack} >$DIRSTACKFILE
+#}
 
 DIRSTACKSIZE=20
 
-setopt AUTO_PUSHD PUSHD_SILENT PUSHD_TO_HOME
+setopt auto_cd auto_pushd pushd_silent pushd_to_home
+setopt pushd_ignore_dups
+setopt pushd_minuS
 
-## Remove duplicate entries
-setopt PUSHD_IGNORE_DUPS
+export FSTYP=soupfs
+export TEST_DEV=/dev/pmem0
+export TEST_DIR=/mnt/ramdisk
 
-## This reverts the +/- operators.
-setopt PUSHD_MINUS
+#setopt inc_append_history
+setopt inc_append_history_time
+setopt append_history
+#setopt share_history
+setopt extended_history
+setopt hist_find_no_dups
+setopt hist_ignore_all_dups
+setopt hist_save_no_dups
+HISTSIZE=1000
+SAVEHIST=1000
+HISTFILE=~/.zhistory
+
+[ -z "$TMUX"  ] && { tmux attach || tmux new-session;}
