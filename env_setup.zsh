@@ -1,7 +1,7 @@
 #!/bin/zsh
 
 
-pwd=${HOME}/dotfiles
+pwd=${HOME}/.dotfiles
 # TODO(mkdong): check real pwd
 
 # get zgen
@@ -17,7 +17,7 @@ source ~/.zshrc
 
 function check {
   # Symlink online-check.sh
-  ln -fs $HOME/dotfiles/lib/online-check.zsh $HOME/.online-check.zsh
+  ln -fs $HOME/.dotfiles/lib/online-check.zsh $HOME/.online-check.zsh
   
   # Write out current crontab
   crontab -l > mycron

@@ -35,7 +35,7 @@ autoload -Uz compinit promptinit zmv colors && colors
 setopt promptsubst
 compinit
 promptinit
-source ~/dotfiles/shells/prompt_tukoo_setup
+source ~/.dotfiles/shells/prompt_tukoo_setup
 #prompt steeeff
 
 zstyle ':completion::complete:*' use-cache 1

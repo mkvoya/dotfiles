@@ -21,7 +21,7 @@ prompt_tukoo_precmd() {
 
   # battery
   if [[ `uname` == 'Darwin' ]]; then
-    battery_info=`~/dotfiles/bin/batcharge.py`
+    battery_info=`~/.dotfiles/bin/batcharge.py`
   else
     battery_info=''
   fi
@@ -41,7 +41,7 @@ prompt_online() {
 }
 
 prompt_battery() {
-  echo `~/dotfiles/bin/batcharge.py`
+  echo `~/.dotfiles/bin/batcharge.py`
 }
 
 integer PSCOL=1
