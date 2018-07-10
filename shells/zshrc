@@ -1,4 +1,5 @@
 # Zsh config
+zmodload zsh/zprof
 
 # Use vi-mode
 bindkey -v
@@ -129,4 +130,13 @@ HISTSIZE=1000
 SAVEHIST=1000
 HISTFILE=~/.zhistory
 
-[ -z "$TMUX"  ] && { tmux attach || tmux new-session;}
+#[ -z "$TMUX"  ] && { tmux attach || tmux new-session;}
+
+#zprof
+alias vim="nvim"
+alias vi="nvim"
+export EDITOR=nvim
+alias v="nvim"
+alias e=$EDITOR
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"

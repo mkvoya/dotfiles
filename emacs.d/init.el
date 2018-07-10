@@ -1,3 +1,6 @@
+;;; Main Config
+
+; load and start server if it's not running
 (load "server")
 (unless (server-running-p) (server-start))
 

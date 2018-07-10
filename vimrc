@@ -1,4 +1,5 @@
 " Configuration file for vim
+language en_US
 
 " Normally we use vim-extensions. If you want true vi-compatibility
 " remove change the following statements
