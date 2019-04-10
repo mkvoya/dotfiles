@@ -114,10 +114,6 @@ setopt auto_cd auto_pushd pushd_silent pushd_to_home
 setopt pushd_ignore_dups
 setopt pushd_minuS
 
-export FSTYP=soupfs
-export TEST_DEV=/dev/pmem0
-export TEST_DIR=/mnt/ramdisk
-
 #setopt inc_append_history
 setopt inc_append_history_time
 setopt append_history

@@ -28,6 +28,7 @@ Plugin 'L9'
 " browser enhencement
 " Use builtin netrw
 Plugin 'scrooloose/nerdtree'
+"Plugin 'Xuyuanp/nerdtree-git-plugin'
 "Plugin 'Shougo/vimproc.vim' " use zsh
 
 " UI enhencement
@@ -56,6 +57,7 @@ Plugin 'flazz/vim-colorschemes'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'tomasr/molokai'
 
+Plugin 'Siphalor/vim-atomified'
 "
 Plugin 'easymotion/vim-easymotion'
 Plugin 'vim-scripts/sjump.vim'
@@ -74,6 +76,7 @@ Plugin 'vim-syntastic/syntastic'
 
 Plugin 'yosssi/vim-ace'
 Plugin 'fatih/vim-go'
+Plugin 'mileszs/ack.vim'
 
 " All of your Plugins must be added before the following line
 "
@@ -81,6 +84,13 @@ call vundle#end()            " required
 filetype plugin indent on    " required
 
 " Put your non-Plugin stuff after this line
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep --smart-case --follow'
+  cnoreabbrev ag Ack
+  cnoreabbrev aG Ack
+  cnoreabbrev Ag Ack
+  cnoreabbrev AG Ack
+endif
 
 " format
 set nu
@@ -136,6 +146,7 @@ set foldmethod=syntax
 set foldlevelstart=20
 
 colorscheme molokai
+colorscheme atomified
 set cc=80
 
 set list
@@ -231,8 +242,27 @@ set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
-let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_always_populate_loc_list = 1
 "let g:syntastic_auto_loc_list = 1
 "let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+"let g:syntastic_check_on_wq = 0
 
+"let b:syntastic_mode = "passive"
+
+set tags+=tags;/
+"set autochdir
+
+let g:go_version_warning = 0
+
+
+fun s:c()
+    syntax match message_trace  ".*TRACE:.*"
+    "hi default link message_trace PmenuSel
+    "hi message_trace ctermbg=LightGreen  ctermfg=LightGreen
+    hi message_trace ctermfg=Blue
+endfun
+
+augroup ft_log
+  autocmd!
+  autocmd syntax log call s:c()
+augroup end
