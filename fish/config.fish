@@ -37,7 +37,7 @@ function fish_prompt
   if not set -q __fish_prompt_char
     switch (id -u)
       case 0
-        set -g __fish_prompt_char '#'
+        set -g __fish_prompt_char '#-#'
       case '*'
 #set -g __fish_prompt_char 'λ'
 #set -g __fish_prompt_char '⊨'
@@ -172,3 +172,54 @@ function _is_multiplexed
   echo $multiplexer
 end
 
+
+
+# ----------------------
+# Git Aliases
+# ----------------------
+#alias ga='git add'
+#alias gaa='git add .'
+#alias gaaa='git add -A'
+#alias gb='git branch'
+#alias gbd='git branch -d '
+#alias gc='git commit'
+#alias gcm='git commit -m'
+#alias gco='git checkout'
+#abbr -a gco git checkout
+#alias gcob='git checkout -b'
+#alias gcom='git checkout master'
+#alias gd='git diff'
+#alias gda='git diff HEAD'
+#alias gi='git init'
+#alias gl='git log'
+#alias glg='git log --graph --oneline --decorate --all'
+abbr -a glg git log --graph --oneline --decorate --all
+#alias gld='git log --pretty=format:"%h %ad %s" --date=short --all'
+#alias gm='git merge --no-ff'
+#alias gp='git pull'
+#alias gs='git status'
+abbr -a gs git status
+#alias gss='git status -s'
+#alias gst='git stash'
+#alias gstl='git stash list'
+#alias gstp='git stash pop'
+#alias gstd='git stash drop'
+
+#alias vim="nvim"
+#alias vi="nvim"
+#export EDITOR=nvim
+set -xU EDITOR nvim
+abbr -a v nvim
+abbr -a e $EDITOR
+abbr -a vim nvim
+abbr -a vi nvim
+
+#test -e "$HOME/.iterm2_shell_integration.zsh" && source "$HOME/.iterm2_shell_integration.zsh"
+
+#export LC_ALL=en_US.UTF-8
+set -xU LC_ALL en_US.UTF-8
+#export LANG=en_US.UTF-8
+set -xU LANG en_US.UTF-8
+
+#export PATH=$PATH:/usr/local/sbin
+set -U fish_user_paths $HOME/.cargo/bin /usr/local/bin /usr/local/sbin $fish_user_paths
