@@ -222,4 +222,9 @@ set -xU LC_ALL en_US.UTF-8
 set -xU LANG en_US.UTF-8
 
 #export PATH=$PATH:/usr/local/sbin
-set -U fish_user_paths $HOME/.cargo/bin /usr/local/bin /usr/local/sbin $fish_user_paths
+if test -d ~/.cargo/bin
+    set -U fish_user_paths $HOME/.cargo/bin $fish_user_paths
+end
+if test -d /usr/loca/bin
+    set -U fish_user_paths /usr/local/bin $fish_user_paths
+end
