@@ -178,6 +178,7 @@ let g:jsx_ext_required = 0
 colorscheme CandyPaperLight
 "colorscheme 0x7A69_dark
 colorscheme chroma
+colorscheme PaperColor
 set bg=dark
 
 " ctrl_p

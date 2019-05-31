@@ -134,5 +134,11 @@ alias vi="nvim"
 export EDITOR=nvim
 alias v="nvim"
 alias e=$EDITOR
+alias mkcd='mkcd() { mkdir $1 && cd $1 };mkcd'
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+
+export PATH=$PATH:/usr/local/sbin
