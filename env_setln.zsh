@@ -7,3 +7,5 @@ mkdir -p ~/.vim/colors
 ln -s ~/.dotfiles/CandyPaperLight.vim ~/.vim/colors/CandyPaperLight.vim
 mkdir -p ~/.config/nvim
 ln -s ~/.vimrc ~/.config/nvim/init.vim
+mkdir -p ~/.config
+ln -s ~/.dotfiles/fish ~/.config/fish
