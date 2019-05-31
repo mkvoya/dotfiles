@@ -29,6 +29,18 @@ function fish_prompt
   # Cache exit status
   set -l last_status $status
   set -l tomita_vi_mode "$TOMITA_VI"
+  set -l vi_color (set_color --bold green)
+
+  if test -z (string match -ri '^no|false|0$' $tomita_vi_mode)
+    switch $fish_bind_mode
+      case default
+        set vi_color (set_color --bold red)
+      case insert
+        set vi_color (set_color --bold green)
+      case visual
+        set vi_color (set_color --bold magenta)
+    end
+  end
 
   # Just calculate these once, to save a few cycles when displaying the prompt
   if not set -q __fish_prompt_hostname
@@ -81,33 +93,18 @@ function fish_prompt
   set -g __fish_git_prompt_show_informative_status true 
  
   # Line 1
-  echo -n $white'⋰ '$hotpink$USER$white' at '$orange$__fish_prompt_hostname$white' in '$limegreen(pwd)$turquoise
+  echo -n $vi_color'⋰ '$hotpink$USER$white' at '$orange$__fish_prompt_hostname$white' in '$limegreen(pwd)$turquoise
   __fish_git_prompt " (%s)"
   echo
 
   # Line 2
-  echo -n $white'⋱ '
+  echo -n $vi_color'⋱ '
   # support for virtual env name
   if set -q VIRTUAL_ENV
       echo -n "($turquoise"(basename "$VIRTUAL_ENV")"$white)"
   end
-  echo -n $white'─'
-
-  if test -z (string match -ri '^no|false|0$' $tomita_vi_mode)
-    switch $fish_bind_mode
-      case default
-        set_color --bold red
-#printf 'n'
-      case insert
-        set_color --bold green
-#        printf 'i'
-      case visual
-        set_color --bold magenta
-#        printf 'v'
-    end
-  end
-  echo -n $__fish_prompt_char $normal
-  set_color normal
+#echo -n $white'─' $vi_color $__fish_prompt_char $normal
+  echo -n $vi_color $__fish_prompt_char $normal
 
 end
 
@@ -189,6 +186,7 @@ end
 #alias gcob='git checkout -b'
 #alias gcom='git checkout master'
 #alias gd='git diff'
+abbr -a gd git diff
 #alias gda='git diff HEAD'
 #alias gi='git init'
 #alias gl='git log'
