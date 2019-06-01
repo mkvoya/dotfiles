@@ -80,7 +80,7 @@ function fish_prompt
   set -l blue (set_color blue)
   set -l limegreen (set_color 87ff00)
   set -l purple (set_color af5fff)
- 
+
   # Configure __fish_git_prompt
   set -g __fish_git_prompt_char_stateseparator ' '
   set -g __fish_git_prompt_color 5fdfff
@@ -90,8 +90,8 @@ function fish_prompt
   set -g __fish_git_prompt_showdirtystate true
   set -g __fish_git_prompt_showuntrackedfiles true
   set -g __fish_git_prompt_showstashstate true
-  set -g __fish_git_prompt_show_informative_status true 
- 
+  set -g __fish_git_prompt_show_informative_status true
+
   # Line 1
   echo -n $vi_color'⋰ '$hotpink$USER$white' at '$orange$__fish_prompt_hostname$white' in '$limegreen(pwd)$turquoise
   __fish_git_prompt " (%s)"
@@ -104,12 +104,19 @@ function fish_prompt
       echo -n "($turquoise"(basename "$VIRTUAL_ENV")"$white)"
   end
 #echo -n $white'─' $vi_color $__fish_prompt_char $normal
+  set -l c1 (set_color F54235)
+  set -l c2 (set_color FDEB61)
+  set -l c3 (set_color 9AE343)
+  set -l ar '➨'
+  set -l ar2 '➥'
+#echo -n ' '$c1$ar$c2$ar$c3$ar
+
   echo -n $vi_color $__fish_prompt_char $normal
 
 end
 
 
-function fish_right_prompt 
+function fish_right_prompt
 	set -l exit_code $status
   __tmux_prompt
   if test $exit_code -ne 0
@@ -206,7 +213,7 @@ abbr -a gs git status
 #alias vim="nvim"
 #alias vi="nvim"
 #export EDITOR=nvim
-set -xU EDITOR nvim
+set -x EDITOR nvim
 abbr -a v nvim
 abbr -a e $EDITOR
 abbr -a vim nvim
@@ -215,9 +222,9 @@ abbr -a vi nvim
 #test -e "$HOME/.iterm2_shell_integration.zsh" && source "$HOME/.iterm2_shell_integration.zsh"
 
 #export LC_ALL=en_US.UTF-8
-set -xU LC_ALL en_US.UTF-8
+set -x LC_ALL en_US.UTF-8
 #export LANG=en_US.UTF-8
-set -xU LANG en_US.UTF-8
+set -x LANG en_US.UTF-8
 
 #export PATH=$PATH:/usr/local/sbin
 if test -d ~/.cargo/bin
