@@ -78,6 +78,8 @@ Plugin 'yosssi/vim-ace'
 Plugin 'fatih/vim-go'
 Plugin 'mileszs/ack.vim'
 
+"Plugin 'vim-scripts/Smart-Tabs'
+
 " All of your Plugins must be added before the following line
 "
 call vundle#end()            " required
@@ -91,6 +93,11 @@ if executable('ag')
   cnoreabbrev Ag Ack
   cnoreabbrev AG Ack
 endif
+
+
+"set autoindent
+"set copyindent
+"set preserveindent
 
 " format
 set nu
@@ -175,7 +182,7 @@ let g:syntastic_cpp_compiler_options = ' -std=c++11 '
 
 " React jsx
 let g:jsx_ext_required = 0
-colorscheme CandyPaperLight
+"colorscheme CandyPaperLight
 "colorscheme 0x7A69_dark
 colorscheme chroma
 colorscheme PaperColor
@@ -267,3 +274,6 @@ augroup ft_log
   autocmd!
   autocmd syntax log call s:c()
 augroup end
+
+
+let g:airline#extensions#whitespace#checks = [ 'trailing', 'long' ]
