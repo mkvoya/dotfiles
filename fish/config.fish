@@ -228,8 +228,11 @@ set -x LANG en_US.UTF-8
 
 #export PATH=$PATH:/usr/local/sbin
 if test -d ~/.cargo/bin
-    set -U fish_user_paths $HOME/.cargo/bin $fish_user_paths
+#    Just dont' use -U, otherwise the fish_user_paths will be appended on each boot, and become extremely long.
+#    set -U fish_user_paths $HOME/.cargo/bin $fish_user_paths
+    set -x PATH $HOME/.cargo/bin $PATH
 end
 if test -d /usr/loca/bin
-    set -U fish_user_paths /usr/local/bin $fish_user_paths
+#    set -U fish_user_paths /usr/local/bin $fish_user_paths
+    set -x PATH /usr/local/bin $PATH
 end
