@@ -236,6 +236,18 @@ abbr -a e $EDITOR
 abbr -a vim nvim
 abbr -a vi nvim
 
+if not type -q rg
+    echo "Would you please install rg? (https://github.com/BurntSushi/ripgrep)"
+else
+    abbr -a ag rg
+    abbr -a ack rg
+end
+
+if not type -q fzf
+    echo "Would you please install fzf? (https://github.com/junegunn/fzf)"
+    echo ";and fisher add jethrokuan/fzf"
+end
+
 #test -e "$HOME/.iterm2_shell_integration.zsh" && source "$HOME/.iterm2_shell_integration.zsh"
 
 #export LC_ALL=en_US.UTF-8
