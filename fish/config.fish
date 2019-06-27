@@ -231,7 +231,7 @@ abbr -a gs git status
 #alias vi="nvim"
 #export EDITOR=nvim
 set -x EDITOR nvim
-abbr -a v nvim
+#abbr -a v nvim "conflict with vlang
 abbr -a e $EDITOR
 abbr -a vim nvim
 abbr -a vi nvim

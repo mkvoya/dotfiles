@@ -106,6 +106,7 @@ set sw=4
 set sts=4
 set expandtab
 au FileType javascript setl sw=2 sts=2 ts=2
+au FileType html setl sw=2 sts=2 ts=2 expandtab
 au FileType cpp setl sw=4 sts=4 ts=4 noexpandtab
 au FileType c setl sw=8 sts=8 ts=8 noexpandtab
 "set noexpandtab
