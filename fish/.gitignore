@@ -1,1 +1,17 @@
 fishd.*
+
+# the following files can be (re)created by fisher
+functions/__fzf_cd.fish
+functions/__fzf_complete.fish
+functions/__fzf_complete_preview.fish
+functions/__fzf_find_file.fish
+functions/__fzf_get_dir.fish
+functions/__fzf_open.fish
+functions/__fzf_parse_commandline.fish
+functions/__fzf_reverse_isearch.fish
+functions/__fzfcmd.fish
+functions/fisher.fish
+completions/fisher.fish
+conf.d/fzf.fish
+conf.d/fzf_key_bindings.fish
+conf.d/fisher.fish
