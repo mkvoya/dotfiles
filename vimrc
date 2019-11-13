@@ -86,8 +86,8 @@ call vundle#end()            " required
 filetype plugin indent on    " required
 
 " Put your non-Plugin stuff after this line
-if executable('ag')
-  let g:ackprg = 'ag --vimgrep --smart-case --follow'
+if executable('rg')
+  let g:ackprg = 'rg --vimgrep --smart-case --follow'
   cnoreabbrev ag Ack
   cnoreabbrev aG Ack
   cnoreabbrev Ag Ack

@@ -70,7 +70,7 @@ function fish_prompt
       case '*'
 #set -g __fish_prompt_char 'λ'
 #set -g __fish_prompt_char '⊨'
-        set -g __fish_prompt_char '➡➤'
+        set -g __fish_prompt_char '=>'
     end
   end
 
@@ -110,12 +110,12 @@ function fish_prompt
   set -g __fish_git_prompt_show_informative_status true
 
   # Line 1
-  echo -n $vi_color'⋰ '$hotpink$USER$white' at '$orange$__fish_prompt_hostname$white' in '$limegreen(pwd)$turquoise
+  echo -n $vi_color'╭'$hotpink$USER$white' at '$orange$__fish_prompt_hostname$white' in '$limegreen(pwd)$turquoise
   __fish_git_prompt " (%s)"
   echo
 
   # Line 2
-  echo -n $vi_color'⋱'
+  echo -n $vi_color'╰'
   # support for virtual env name
   if set -q VIRTUAL_ENV
       echo -n "($turquoise"(basename "$VIRTUAL_ENV")"$white)"
@@ -128,7 +128,7 @@ function fish_prompt
   set -l ar2 '➥'
 #echo -n ' '$c1$ar$c2$ar$c3$ar
 
-  echo -n $vi_color $__fish_prompt_char $normal
+  echo -n $vi_color$__fish_prompt_char $normal
 
 end
 
@@ -248,14 +248,17 @@ if not type -q fzf
     echo ";and fisher add jethrokuan/fzf"
 end
 
-#test -e "$HOME/.iterm2_shell_integration.zsh" && source "$HOME/.iterm2_shell_integration.zsh"
+# test -e "$HOME/.iterm2_shell_integration.zsh" && source "$HOME/.iterm2_shell_integration.zsh"
 
-#export LC_ALL=en_US.UTF-8
+# export LC_ALL=en_US.UTF-8
 set -x LC_ALL en_US.UTF-8
-#export LANG=en_US.UTF-8
+# export LANG=en_US.UTF-8
 set -x LANG en_US.UTF-8
 
-#export PATH=$PATH:/usr/local/sbin
+# export HOMEBREW_NO_AUTO_UPDATE=1 to avoid updates on each brew invocation
+set -x HOMEBREW_NO_AUTO_UPDATE 1
+
+# export PATH=$PATH:/usr/local/sbin
 if test -d ~/.cargo/bin
 #    Just dont' use -U, otherwise the fish_user_paths will be appended on each boot, and become extremely long.
 #    set -U fish_user_paths $HOME/.cargo/bin $fish_user_paths
