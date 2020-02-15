@@ -199,6 +199,7 @@ end
 # Git Aliases
 # ----------------------
 #alias ga='git add'
+abbr -a ga git add
 #alias gaa='git add .'
 #alias gaaa='git add -A'
 #alias gb='git branch'
@@ -211,9 +212,11 @@ end
 #alias gcom='git checkout master'
 #alias gd='git diff'
 abbr -a gd git diff
+abbr -a gf git fetch
 #alias gda='git diff HEAD'
 #alias gi='git init'
 #alias gl='git log'
+abbr -a gl git log
 #alias glg='git log --graph --oneline --decorate --all'
 abbr -a glg git log --graph --oneline --decorate --all
 #alias gld='git log --pretty=format:"%h %ad %s" --date=short --all'
