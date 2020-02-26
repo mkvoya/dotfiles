@@ -224,6 +224,7 @@ abbr -a glg git log --graph --oneline --decorate --all
 #alias gp='git pull'
 #alias gs='git status'
 abbr -a gs git status
+abbr -a gsw git switch
 #alias gss='git status -s'
 #alias gst='git stash'
 #alias gstl='git stash list'
