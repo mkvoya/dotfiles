@@ -11,79 +11,79 @@ au BufWrite /private/tmp/crontab.* set nowritebackup nobackup
 " Don't write backup file if vim is being called by "chpass"
 au BufWrite /private/etc/pw.* set nowritebackup nobackup
 
-"--------- add for Vundle.vim -----------
 set nocompatible              " be iMproved, required
-filetype off                  " required
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+"--------- add for vim-plug -----------
 
-" let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
+" vim-plug doesn't need to set rtp
+"set rtp+=~/.vim/plugged
+" Specify a directory for plugins
+" - For Neovim: stdpath('data') . '/plugged'
+" - Avoid using standard Vim directory names like 'plugin'
+call plug#begin('~/.vim/plugged')
 
 " tools
-Plugin 'L9'
+Plug 'vim-scripts/L9'
 
 " browser enhencement
 " Use builtin netrw
-Plugin 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree'
 "Plugin 'Xuyuanp/nerdtree-git-plugin'
 "Plugin 'Shougo/vimproc.vim' " use zsh
 
 " UI enhencement
-Plugin 'bling/vim-airline'
-Plugin 'drmikehenry/vim-fontsize'
+Plug 'bling/vim-airline'
+Plug 'drmikehenry/vim-fontsize'
 
 " language support
-Plugin 'kchmck/vim-coffee-script'
-Plugin 'pangloss/vim-javascript'
-Plugin 'mxw/vim-jsx'
-Plugin 'plasticboy/vim-markdown'
-Plugin 'dzeban/vim-log-syntax'
+Plug 'kchmck/vim-coffee-script'
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
+Plug 'plasticboy/vim-markdown'
+Plug 'dzeban/vim-log-syntax'
 
 "+coding enhencement
-Plugin 'majutsushi/tagbar'
-Plugin 'godlygeek/tabular'
-Plugin 'terryma/vim-multiple-cursors'
-Plugin 'tpope/vim-surround'
-Plugin 'nathanaelkane/vim-indent-guides'
+Plug 'majutsushi/tagbar'
+Plug 'godlygeek/tabular'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'tpope/vim-surround'
+Plug 'nathanaelkane/vim-indent-guides'
 "Plugin 'Shougo/unite.vim' Use ctrlp
-Plugin 'Shougo/neocomplete.vim'
+Plug 'Shougo/neocomplete.vim'
 "|--git
-Plugin 'tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive'
 " colorscheme
-Plugin 'flazz/vim-colorschemes'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'tomasr/molokai'
+Plug 'flazz/vim-colorschemes'
+Plug 'altercation/vim-colors-solarized'
+Plug 'tomasr/molokai'
 
-Plugin 'Siphalor/vim-atomified'
+Plug 'Siphalor/vim-atomified'
 "
-Plugin 'easymotion/vim-easymotion'
-Plugin 'vim-scripts/sjump.vim'
-Plugin 'PProvost/vim-markdown-jekyll'
-Plugin 'mkdong/vim-linux-coding-style'
+Plug 'easymotion/vim-easymotion'
+Plug 'vim-scripts/sjump.vim'
+Plug 'PProvost/vim-markdown-jekyll'
+Plug 'mkdong/vim-linux-coding-style'
 
-Plugin 'jceb/vim-orgmode'
+Plug 'jceb/vim-orgmode'
 
-Plugin 'airblade/vim-gitgutter'
-Plugin 'vim-scripts/taglist.vim'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'vim-scripts/rainbow_parentheses.vim'
-Plugin 'osyo-manga/vim-over'
-Plugin 'crater2150/vim-theme-chroma'
-Plugin 'vim-syntastic/syntastic'
+Plug 'airblade/vim-gitgutter'
+Plug 'vim-scripts/taglist.vim'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'vim-scripts/rainbow_parentheses.vim'
+Plug 'osyo-manga/vim-over'
+Plug 'crater2150/vim-theme-chroma'
+Plug 'vim-syntastic/syntastic'
 
-Plugin 'yosssi/vim-ace'
-Plugin 'fatih/vim-go'
-Plugin 'mileszs/ack.vim'
+Plug 'yosssi/vim-ace'
+Plug 'fatih/vim-go'
+Plug 'mileszs/ack.vim'
 
 "Plugin 'vim-scripts/Smart-Tabs'
 
 " All of your Plugins must be added before the following line
 "
-call vundle#end()            " required
-filetype plugin indent on    " required
+" Initialize plugin system
+call plug#end()
 
 " Put your non-Plugin stuff after this line
 if executable('rg')
