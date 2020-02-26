@@ -33,6 +33,7 @@ Plug 'scrooloose/nerdtree'
 
 " UI enhencement
 Plug 'bling/vim-airline'
+" Plug 'itchyny/lightline.vim'
 Plug 'drmikehenry/vim-fontsize'
 
 " language support
@@ -79,6 +80,11 @@ Plug 'fatih/vim-go'
 Plug 'mileszs/ack.vim'
 
 "Plugin 'vim-scripts/Smart-Tabs'
+"
+" Nvim does not evaluate folds during insert-mo
+" Plug 'Konfekt/FastFold' "foldmethod=syntax is slow for large file, use this!
+
+Plug 'dstein64/vim-startuptime' " visualize startuptime
 
 " All of your Plugins must be added before the following line
 "
@@ -147,8 +153,28 @@ set fileformats=unix,dos,mac
 
 set mouse=a
 
+" disable this for large file loading
+let g:airline#extensions#tagbar#enabled = 0
+
+" prefix with s: for local script-only functions
+function! s:setFolding()
+  let s:fz = line2byte('$') + len(getline('$'))
+  if s:fz < 1024 * 1024 "1M
+      set foldmethod=syntax
+  else
+      echo "Large file, optimize for speed."
+      set foldmethod=indent
+  endif
+endfunction
+
+augroup folding
+   au!
+   au BufReadPost * :call s:setFolding()
+augroup end
+
 syntax enable
-set foldmethod=syntax
+"set foldmethod=syntax
+set foldmethod=manual
 "set nofoldenable
 "set foldlevel=1
 set foldlevelstart=20
@@ -278,3 +304,14 @@ augroup end
 
 
 let g:airline#extensions#whitespace#checks = [ 'trailing', 'long' ]
+let g:airline_mode_map = {
+      \ '__'     : '-',
+      \ 'c'      : 'CMD',
+      \ 'i'      : 'I',
+      \ 'n'      : 'N',
+      \ 'R'      : 'R',
+      \ 'Rv'     : 'V-R',
+      \ 's'      : 'SEL',
+      \ 't'      : 'TERM',
+      \ 'v'      : 'VIS',
+      \ }
