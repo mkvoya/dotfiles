@@ -210,8 +210,11 @@ abbr -a ga git add
 #abbr -a gco git checkout
 #alias gcob='git checkout -b'
 #alias gcom='git checkout master'
+abbr -a gr git restore
+abbr -a grs git restore --staged
 #alias gd='git diff'
 abbr -a gd git diff
+abbr -a gds git diff --staged
 abbr -a gf git fetch
 #alias gda='git diff HEAD'
 #alias gi='git init'
@@ -222,6 +225,7 @@ abbr -a glg git log --graph --oneline --decorate --all
 #alias gld='git log --pretty=format:"%h %ad %s" --date=short --all'
 #alias gm='git merge --no-ff'
 #alias gp='git pull'
+abbr -a gp git pull
 #alias gs='git status'
 abbr -a gs git status
 abbr -a gsw git switch
