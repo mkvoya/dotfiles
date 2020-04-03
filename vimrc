@@ -57,6 +57,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'flazz/vim-colorschemes'
 Plug 'altercation/vim-colors-solarized'
 Plug 'tomasr/molokai'
+Plug 'morhetz/gruvbox'
 
 Plug 'Siphalor/vim-atomified'
 "
