@@ -243,6 +243,7 @@ set -x EDITOR nvim
 abbr -a e $EDITOR
 abbr -a vim nvim
 abbr -a vi nvim
+abbr -a m make
 
 if not type -q rg
     echo "Would you please install rg? (https://github.com/BurntSushi/ripgrep)"
