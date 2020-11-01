@@ -277,3 +277,6 @@ if test -d /usr/loca/bin
 #    set -U fish_user_paths /usr/local/bin $fish_user_paths
     set -x PATH /usr/local/bin $PATH
 end
+if test -d ~/.local/bin
+    set -x PATH ~/.local/bin $PATH
+end
