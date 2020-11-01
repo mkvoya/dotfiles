@@ -114,6 +114,57 @@ function fish_prompt
   __fish_git_prompt " (%s)"
   echo
 
+  function echo_color --description "Echo last arg with color (without newline)"
+    set s $argv[-1]
+    set -e argv[-1]
+
+    set_color $argv
+    echo $s
+    set_color normal
+  end
+
+  function echo_color_without_newline --description "Echo last arg with color (without newline)"
+    set s $argv[-1]
+    set -e argv[-1]
+
+    set_color $argv
+    echo -n $s
+    set_color normal
+  end
+
+  function echo_color_without_normal --description "Echo last arg with color (without newline)"
+    set s $argv[-1]
+    set -e argv[-1]
+
+    set_color $argv
+    echo -n $s
+  end
+
+#  set -l exit_code $status
+#  __tmux_prompt
+#  if test $exit_code -ne 0
+#    set -l exit_color red
+#  else
+#    set -l exit_color 666666
+#  end
+#  printf '%d' $exit_code
+#  set -l column_color E3782C
+#  printf ' ≡'
+#  set -l date_color CA1B00
+#  printf ' %s' (date +"%Y-%m-%d")
+#  set -l time_color 5FA701
+#  printf ' %s' (date +"%H:%M:%S")
+#  set -l normal_color normal
+#  set -l right_prompt (echo_color -b $exit_color $exit_code)
+#
+#
+## display first line
+#  echo  # blank line
+#  echo -n $left_prompt
+#  set_color -b $bg_color
+#  printf "%-"$spaces"s" " "
+#  echo $right_prompt
+#
   # Line 2
   echo -n $vi_color'╰'
   # support for virtual env name
@@ -134,7 +185,7 @@ end
 
 
 function fish_right_prompt
-	set -l exit_code $status
+  set -l exit_code $status
   __tmux_prompt
   if test $exit_code -ne 0
     set_color red
@@ -222,6 +273,7 @@ abbr -a gf git fetch
 abbr -a gl git log
 #alias glg='git log --graph --oneline --decorate --all'
 abbr -a glg git log --graph --oneline --decorate --all
+abbr -a glgs git log --graph --decorate --all --stat
 #alias gld='git log --pretty=format:"%h %ad %s" --date=short --all'
 #alias gm='git merge --no-ff'
 #alias gp='git pull'
@@ -245,14 +297,22 @@ abbr -a vim nvim
 abbr -a vi nvim
 abbr -a m make
 
-if not type -q rg
+function t
+  if test -d /Volumes/ramfs
+    cd /Volumes/ramfs
+  else if test -d /tmpfs
+    cd /tmpfs
+  end
+end
+
+if status --is-interactive && not type -q rg
     echo "Would you please install rg? (https://github.com/BurntSushi/ripgrep)"
 else
     abbr -a ag rg
     abbr -a ack rg
 end
 
-if not type -q fzf
+if status --is-interactive && not type -q fzf
     echo "Would you please install fzf? (https://github.com/junegunn/fzf)"
     echo ";and fisher add jethrokuan/fzf"
 end
@@ -279,4 +339,8 @@ if test -d /usr/loca/bin
 end
 if test -d ~/.local/bin
     set -x PATH ~/.local/bin $PATH
+end
+
+if test -d /Users/mksegv/code/flutter
+    set -x PATH $PATH /Users/mksegv/code/flutter/bin
 end
