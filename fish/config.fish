@@ -333,7 +333,7 @@ if test -d ~/.cargo/bin
 #    set -U fish_user_paths $HOME/.cargo/bin $fish_user_paths
     set -x PATH $HOME/.cargo/bin $PATH
 end
-if test -d /usr/loca/bin
+if test -d /usr/local/bin
 #    set -U fish_user_paths /usr/local/bin $fish_user_paths
     set -x PATH /usr/local/bin $PATH
 end
@@ -341,6 +341,19 @@ if test -d ~/.local/bin
     set -x PATH ~/.local/bin $PATH
 end
 
-if test -d /Users/mksegv/code/flutter
-    set -x PATH $PATH /Users/mksegv/code/flutter/bin
+fish_add_path ~/.emacs.d/bin
+fish_add_path /usr/local/opt/texinfo/bin
+fish_add_path /usr/local/opt/ruby/bin
+fish_add_path /usr/local/lib/ruby/gems/3.0.0/bin
+
+
+# Mainly for Emacs Tramp
+if test "$TERM" = "dumb"
+  function fish_prompt
+    echo "\$ "
+  end
+
+  function fish_right_prompt; end
+  function fish_greeting; end
+  function fish_title; end
 end
