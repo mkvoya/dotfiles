@@ -348,7 +348,7 @@ fish_add_path /usr/local/opt/ruby/bin
 fish_add_path /usr/local/lib/ruby/gems/3.0.0/bin
 
 
-# Mainly for Emacs Tramp
+# For Emacs Tramp
 if test "$TERM" = "dumb"
   function fish_prompt
     echo "\$ "
@@ -359,12 +359,3 @@ if test "$TERM" = "dumb"
   function fish_title; end
 end
 
-if test "$TERM" = "dumb"
-  function fish_prompt
-    echo "\$ "
-  end
-
-  function fish_right_prompt; end
-  function fish_greeting; end
-  function fish_title; end
-end
