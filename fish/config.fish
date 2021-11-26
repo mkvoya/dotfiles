@@ -337,6 +337,7 @@ if test -d /usr/local/bin
 #    set -U fish_user_paths /usr/local/bin $fish_user_paths
     set -x PATH /usr/local/bin $PATH
 end
+
 if test -d ~/.local/bin
     set -x PATH ~/.local/bin $PATH
 end
@@ -348,6 +349,16 @@ fish_add_path /usr/local/lib/ruby/gems/3.0.0/bin
 
 
 # Mainly for Emacs Tramp
+if test "$TERM" = "dumb"
+  function fish_prompt
+    echo "\$ "
+  end
+
+  function fish_right_prompt; end
+  function fish_greeting; end
+  function fish_title; end
+end
+
 if test "$TERM" = "dumb"
   function fish_prompt
     echo "\$ "
