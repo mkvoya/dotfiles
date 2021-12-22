@@ -80,6 +80,11 @@ Plug 'yosssi/vim-ace'
 Plug 'fatih/vim-go'
 Plug 'mileszs/ack.vim'
 
+"Plug 'yuttie/comfortable-motion.vim'
+Plug 'terryma/vim-smooth-scroll'
+
+Plug 'axvr/org.vim'
+
 "Plugin 'vim-scripts/Smart-Tabs'
 "
 " Nvim does not evaluate folds during insert-mo

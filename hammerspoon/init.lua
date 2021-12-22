@@ -16,6 +16,7 @@ hs.hotkey.bind(masterkey, "K", function()
     f.y = f.y - 10
     win:setFrame(f)
 end)
+
 hs.hotkey.bind(masterkey, "H", function()
     local win = hs.window.focusedWindow()
     local f = win:frame()
@@ -112,4 +113,8 @@ hs.hotkey.bind(slavekey, "S", function()
     local win = hs.window.focusedWindow()
     local nextScreen = win:screen():next()
     win:moveToScreen(nextScreen)
+end)
+
+hs.hotkey.bind(masterkey, "space", function()
+    hs.execute("emacsclient -n -e '(toggle-floating-frame)'", true)
 end)

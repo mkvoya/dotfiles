@@ -347,15 +347,6 @@ fish_add_path /usr/local/opt/texinfo/bin
 fish_add_path /usr/local/opt/ruby/bin
 fish_add_path /usr/local/lib/ruby/gems/3.0.0/bin
 
-
-# For Emacs Tramp
-if test "$TERM" = "dumb"
-  function fish_prompt
-    echo "\$ "
-  end
-
-  function fish_right_prompt; end
-  function fish_greeting; end
-  function fish_title; end
+if test -f ~/.emacs.d/emacs.fish
+   source ~/.emacs.d/emacs.fish
 end
-
