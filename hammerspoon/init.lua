@@ -116,5 +116,9 @@ hs.hotkey.bind(slavekey, "S", function()
 end)
 
 hs.hotkey.bind(masterkey, "space", function()
-    hs.execute("emacsclient -n -e '(toggle-floating-frame)'", true)
+    hs.execute("emacsclient -n -e '(toggle-floating-frame)' &", true)
 end)
+
+
+local clocking = require "hammerspoon-clocking"
+dateTimeGarbageCollectorPreventer = clocking.init()

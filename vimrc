@@ -92,6 +92,10 @@ Plug 'axvr/org.vim'
 
 Plug 'dstein64/vim-startuptime' " visualize startuptime
 
+
+Plug 'sunjon/stylish.nvim'
+
+
 " All of your Plugins must be added before the following line
 "
 " Initialize plugin system

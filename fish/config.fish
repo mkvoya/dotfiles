@@ -319,34 +319,27 @@ end
 
 # test -e "$HOME/.iterm2_shell_integration.zsh" && source "$HOME/.iterm2_shell_integration.zsh"
 
-# export LC_ALL=en_US.UTF-8
-set -x LC_ALL en_US.UTF-8
-# export LANG=en_US.UTF-8
-set -x LANG en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+# set -x LC_ALL en_US.UTF-8
+export LANG=en_US.UTF-8
+# set -x LANG en_US.UTF-8
 
 # export HOMEBREW_NO_AUTO_UPDATE=1 to avoid updates on each brew invocation
 set -x HOMEBREW_NO_AUTO_UPDATE 1
 
-# export PATH=$PATH:/usr/local/sbin
-if test -d ~/.cargo/bin
-#    Just dont' use -U, otherwise the fish_user_paths will be appended on each boot, and become extremely long.
-#    set -U fish_user_paths $HOME/.cargo/bin $fish_user_paths
-    set -x PATH $HOME/.cargo/bin $PATH
-end
-if test -d /usr/local/bin
-#    set -U fish_user_paths /usr/local/bin $fish_user_paths
-    set -x PATH /usr/local/bin $PATH
-end
-
-if test -d ~/.local/bin
-    set -x PATH ~/.local/bin $PATH
-end
+fish_add_path /usr/local/bin
+fish_add_path ~/.local/bin
+fish_add_path -p $HOME/.cargo/bin  # prepend
 
 fish_add_path ~/.emacs.d/bin
 fish_add_path /usr/local/opt/texinfo/bin
 fish_add_path /usr/local/opt/ruby/bin
 fish_add_path /usr/local/lib/ruby/gems/3.0.0/bin
+fish_add_path /usr/local/opt/python@3.10/bin
+fish_add_path /usr/local/opt/python@3.10/libexec/bin
 
 if test -f ~/.emacs.d/emacs.fish
    source ~/.emacs.d/emacs.fish
 end
+
+set -x XML_CATALOG_FILES /usr/local/etc/xml/catalog
