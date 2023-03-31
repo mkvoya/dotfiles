@@ -290,10 +290,10 @@ abbr -a gsw git switch
 #alias vim="nvim"
 #alias vi="nvim"
 #export EDITOR=nvim
-#set -x EDITOR nvim
-set -x EDITOR emacsclient -c
+set -x EDITOR nvim
+# set -x EDITOR emacsclient -c
 #abbr -a v nvim "conflict with vlang
-abbr -a e $EDITOR
+abbr -a e "emacsclient -c -n"
 abbr -a vim nvim
 abbr -a vi nvim
 abbr -a m make

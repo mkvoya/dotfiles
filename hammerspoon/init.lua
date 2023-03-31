@@ -116,7 +116,13 @@ hs.hotkey.bind(slavekey, "S", function()
 end)
 
 hs.hotkey.bind(masterkey, "space", function()
-    hs.execute("emacsclient -n -e '(toggle-floating-frame)' &", true)
+    hs.task.new("/usr/local/bin/emacsclient", nil, function()
+        hs.alert.show("done")
+    end, {
+    "-n ",
+    "-e ",
+    "'(toggle-floating-frame)'"
+    }):start()
 end)
 
 
