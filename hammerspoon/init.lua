@@ -125,6 +125,3 @@ hs.hotkey.bind(masterkey, "space", function()
     }):start()
 end)
 
-
-local clocking = require "hammerspoon-clocking"
-dateTimeGarbageCollectorPreventer = clocking.init()

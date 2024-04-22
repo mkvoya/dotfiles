@@ -2,7 +2,7 @@
 # fisher package manager
 if not functions -q fisher
     set -q XDG_CONFIG_HOME; or set XDG_CONFIG_HOME ~/.config
-    curl https://git.io/fisher --create-dirs -sLo $XDG_CONFIG_HOME/fish/functions/fisher.fish
+# curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher
     fish -c fisher
 end
 
@@ -293,8 +293,9 @@ abbr -a gsw git switch
 set -x EDITOR nvim
 # set -x EDITOR emacsclient -c
 #abbr -a v nvim "conflict with vlang
-abbr -a e "emacsclient -c -n"
+# abbr -a e "emacsclient -c -n"
 abbr -a vim nvim
+abbr -a e nvim
 abbr -a vi nvim
 abbr -a m make
 
@@ -338,6 +339,7 @@ fish_add_path /usr/local/opt/ruby/bin
 fish_add_path /usr/local/lib/ruby/gems/3.0.0/bin
 fish_add_path /usr/local/opt/python@3.10/bin
 fish_add_path /usr/local/opt/python@3.10/libexec/bin
+fish_add_path ~/.cargo/bin
 
 if test -f ~/.emacs.d/emacs.fish
    source ~/.emacs.d/emacs.fish
