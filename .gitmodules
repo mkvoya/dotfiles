@@ -1,3 +1,6 @@
 [submodule "emacs.d"]
 	path = emacs.d
 	url = git@github.com:mkvoya/emacs.d.git
+[submodule "nvim"]
+	path = nvim
+	url = git@github.com:mkvoya/.nvim.git
