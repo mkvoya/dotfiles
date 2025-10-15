@@ -108,6 +108,18 @@ hs.hotkey.bind(slavekey, "R", function()
     f.h = max.h * 2 / 3
     win:setFrame(f)
 end)
+hs.hotkey.bind(slavekey, "N", function()
+    local win = hs.window.focusedWindow()
+    local f = win:frame()
+    local screen = win:screen()
+    local max = screen:frame()
+
+    f.x = max.x + max.w * 5 / 6
+    f.y = max.y + max.h / 12
+    f.w = max.w / 6
+    f.h = max.h / 3
+    win:setFrame(f)
+end)
 
 hs.hotkey.bind(slavekey, "S", function()
     local win = hs.window.focusedWindow()
@@ -125,3 +137,29 @@ hs.hotkey.bind(masterkey, "space", function()
     }):start()
 end)
 
+function encodeURI(str)
+  if (str) then
+    str = string.gsub(str, "([^%w _ %- . ~])",
+                      function (c) return string.format ("%%%02X", string.byte(c)) end)
+    str = string.gsub (str, " ", "%%20")
+  end
+  return str
+end
+
+hs.hotkey.bind(
+  slavekey, "C",
+  function ()
+    local focusedElement = hs.uielement.focusedElement();
+
+    if (focusedElement == nil or focusedElement:selectedText() == '' or focusedElement:selectedText() == nil) then
+      hs.notify.new({title="Capture", informativeText="No selected text"}):send()
+      return
+    end
+
+    local focusedWindow = window.focusedWindow()
+
+    local url = string.format("org-protocol://capture?template=c&url=hammerspoon&title=%s&body=%s", escapeUri(focusedWindow:title()), escapeUri(focusedElement:selectedText()))
+
+    hs.notify.new({title="Capture", informativeText=focusedWindow:title() .. "\n" .. focusedElement:selectedText()}):send()
+    hs.execute(string.format("open '%s'", url))
+end)

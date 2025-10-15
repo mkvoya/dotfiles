@@ -2,24 +2,24 @@
 # fisher package manager
 if not functions -q fisher
     set -q XDG_CONFIG_HOME; or set XDG_CONFIG_HOME ~/.config
-# curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher
+    # curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher
     fish -c fisher
 end
 
 # fzf
 function fzf-cdhist-widget -d 'cd to one of the previously visited locations'
-	# Clear non-existent folders from cdhist.
-	set -l buf
-	for i in (seq 1 (count $dirprev))
-		set -l dir $dirprev[$i]
-		if test -d $dir
-			set buf $buf $dir
-		end
-	end
-	set dirprev $buf
-	string join \n $dirprev | tac | sed 1d | eval (__fzfcmd) +m --tiebreak=index --toggle-sort=ctrl-r $FZF_CDHIST_OPTS | read -l result
-	[ "$result" ]; and cd $result
-	commandline -f repaint
+    # Clear non-existent folders from cdhist.
+    set -l buf
+    for i in (seq 1 (count $dirprev))
+        set -l dir $dirprev[$i]
+        if test -d $dir
+            set buf $buf $dir
+        end
+    end
+    set dirprev $buf
+    string join \n $dirprev | tac | sed 1d | eval (__fzfcmd) +m --tiebreak=index --toggle-sort=ctrl-r $FZF_CDHIST_OPTS | read -l result
+    [ "$result" ]; and cd $result
+    commandline -f repaint
 end
 
 
@@ -35,213 +35,213 @@ set -g fish_key_bindings hybrid_bindings
 
 
 function fish_greeting
-  set_color $fish_color_autosuggestion
-  echo "Hello From Fish!"
-  set_color normal
+    set_color $fish_color_autosuggestion
+    echo "Hello From Fish!"
+    set_color normal
 end
 
 
 # theme modified from lambda
 function fish_prompt
-  # Cache exit status
-  set -l last_status $status
-  set -l tomita_vi_mode "$TOMITA_VI"
-  set -l vi_color (set_color --bold green)
+    # Cache exit status
+    set -l last_status $status
+    set -l tomita_vi_mode "$TOMITA_VI"
+    set -l vi_color (set_color --bold green)
 
-  if test -z (string match -ri '^no|false|0$' $tomita_vi_mode)
-    switch $fish_bind_mode
-      case default
-        set vi_color (set_color --bold red)
-      case insert
-        set vi_color (set_color --bold green)
-      case visual
-        set vi_color (set_color --bold magenta)
+    if test -z (string match -ri '^no|false|0$' $tomita_vi_mode)
+        switch $fish_bind_mode
+            case default
+                set vi_color (set_color --bold red)
+            case insert
+                set vi_color (set_color --bold green)
+            case visual
+                set vi_color (set_color --bold magenta)
+        end
     end
-  end
 
-  # Just calculate these once, to save a few cycles when displaying the prompt
-  if not set -q __fish_prompt_hostname
-    set -g __fish_prompt_hostname (hostname|cut -d . -f 1)
-  end
-  if not set -q __fish_prompt_char
-    switch (id -u)
-      case 0
-        set -g __fish_prompt_char '#-#'
-      case '*'
-#set -g __fish_prompt_char 'λ'
-#set -g __fish_prompt_char '⊨'
-        set -g __fish_prompt_char '=>'
+    # Just calculate these once, to save a few cycles when displaying the prompt
+    if not set -q __fish_prompt_hostname
+        set -g __fish_prompt_hostname (hostname|cut -d . -f 1)
     end
-  end
+    if not set -q __fish_prompt_char
+        switch (id -u)
+            case 0
+                set -g __fish_prompt_char '#-#'
+            case '*'
+                #set -g __fish_prompt_char 'λ'
+                #set -g __fish_prompt_char '⊨'
+                set -g __fish_prompt_char '=>'
+        end
+    end
 
-  # Setup colors
-  #use extended color pallete if available
-#if [[ $terminfo[colors] -ge 256 ]]; then
-#    turquoise="%F{81}"
-#    orange="%F{166}"
-#    purple="%F{135}"
-#    hotpink="%F{161}"
-#    limegreen="%F{118}"
-#else
-#    turquoise="%F{cyan}"
-#    orange="%F{yellow}"
-#    purple="%F{magenta}"
-#    hotpink="%F{red}"
-#    limegreen="%F{green}"
-#fi
-  set -l normal (set_color normal)
-  set -l white (set_color FFFFFF)
-  set -l turquoise (set_color 5fdfff)
-  set -l orange (set_color df5f00)
-  set -l hotpink (set_color df005f)
-  set -l blue (set_color blue)
-  set -l limegreen (set_color 87ff00)
-  set -l purple (set_color af5fff)
+    # Setup colors
+    #use extended color pallete if available
+    #if [[ $terminfo[colors] -ge 256 ]]; then
+    #    turquoise="%F{81}"
+    #    orange="%F{166}"
+    #    purple="%F{135}"
+    #    hotpink="%F{161}"
+    #    limegreen="%F{118}"
+    #else
+    #    turquoise="%F{cyan}"
+    #    orange="%F{yellow}"
+    #    purple="%F{magenta}"
+    #    hotpink="%F{red}"
+    #    limegreen="%F{green}"
+    #fi
+    set -l normal (set_color normal)
+    set -l white (set_color FFFFFF)
+    set -l turquoise (set_color 5fdfff)
+    set -l orange (set_color df5f00)
+    set -l hotpink (set_color df005f)
+    set -l blue (set_color blue)
+    set -l limegreen (set_color 87ff00)
+    set -l purple (set_color af5fff)
 
-  # Configure __fish_git_prompt
-  set -g __fish_git_prompt_char_stateseparator ' '
-  set -g __fish_git_prompt_color 5fdfff
-  set -g __fish_git_prompt_color_flags df5f00
-  set -g __fish_git_prompt_color_prefix white
-  set -g __fish_git_prompt_color_suffix white
-  set -g __fish_git_prompt_showdirtystate true
-  set -g __fish_git_prompt_showuntrackedfiles true
-  set -g __fish_git_prompt_showstashstate true
-  set -g __fish_git_prompt_show_informative_status true
+    # Configure __fish_git_prompt
+    set -g __fish_git_prompt_char_stateseparator ' '
+    set -g __fish_git_prompt_color 5fdfff
+    set -g __fish_git_prompt_color_flags df5f00
+    set -g __fish_git_prompt_color_prefix white
+    set -g __fish_git_prompt_color_suffix white
+    set -g __fish_git_prompt_showdirtystate true
+    set -g __fish_git_prompt_showuntrackedfiles true
+    set -g __fish_git_prompt_showstashstate true
+    set -g __fish_git_prompt_show_informative_status true
 
-  # Line 1
-  echo -n $vi_color'╭'$hotpink$USER$white' at '$orange$__fish_prompt_hostname$white' in '$limegreen(pwd)$turquoise
-  __fish_git_prompt " (%s)"
-  echo
+    # Line 1
+    echo -n $vi_color'╭'$hotpink$USER$white' at '$orange$__fish_prompt_hostname$white' in '$limegreen(pwd)$turquoise
+    __fish_git_prompt " (%s)"
+    echo
 
-  function echo_color --description "Echo last arg with color (without newline)"
-    set s $argv[-1]
-    set -e argv[-1]
+    function echo_color --description "Echo last arg with color (without newline)"
+        set s $argv[-1]
+        set -e argv[-1]
 
-    set_color $argv
-    echo $s
-    set_color normal
-  end
+        set_color $argv
+        echo $s
+        set_color normal
+    end
 
-  function echo_color_without_newline --description "Echo last arg with color (without newline)"
-    set s $argv[-1]
-    set -e argv[-1]
+    function echo_color_without_newline --description "Echo last arg with color (without newline)"
+        set s $argv[-1]
+        set -e argv[-1]
 
-    set_color $argv
-    echo -n $s
-    set_color normal
-  end
+        set_color $argv
+        echo -n $s
+        set_color normal
+    end
 
-  function echo_color_without_normal --description "Echo last arg with color (without newline)"
-    set s $argv[-1]
-    set -e argv[-1]
+    function echo_color_without_normal --description "Echo last arg with color (without newline)"
+        set s $argv[-1]
+        set -e argv[-1]
 
-    set_color $argv
-    echo -n $s
-  end
+        set_color $argv
+        echo -n $s
+    end
 
-#  set -l exit_code $status
-#  __tmux_prompt
-#  if test $exit_code -ne 0
-#    set -l exit_color red
-#  else
-#    set -l exit_color 666666
-#  end
-#  printf '%d' $exit_code
-#  set -l column_color E3782C
-#  printf ' ≡'
-#  set -l date_color CA1B00
-#  printf ' %s' (date +"%Y-%m-%d")
-#  set -l time_color 5FA701
-#  printf ' %s' (date +"%H:%M:%S")
-#  set -l normal_color normal
-#  set -l right_prompt (echo_color -b $exit_color $exit_code)
-#
-#
-## display first line
-#  echo  # blank line
-#  echo -n $left_prompt
-#  set_color -b $bg_color
-#  printf "%-"$spaces"s" " "
-#  echo $right_prompt
-#
-  # Line 2
-  echo -n $vi_color'╰'
-  # support for virtual env name
-  if set -q VIRTUAL_ENV
-      echo -n "($turquoise"(basename "$VIRTUAL_ENV")"$white)"
-  end
-#echo -n $white'─' $vi_color $__fish_prompt_char $normal
-  set -l c1 (set_color F54235)
-  set -l c2 (set_color FDEB61)
-  set -l c3 (set_color 9AE343)
-  set -l ar '➨'
-  set -l ar2 '➥'
-#echo -n ' '$c1$ar$c2$ar$c3$ar
+    #  set -l exit_code $status
+    #  __tmux_prompt
+    #  if test $exit_code -ne 0
+    #    set -l exit_color red
+    #  else
+    #    set -l exit_color 666666
+    #  end
+    #  printf '%d' $exit_code
+    #  set -l column_color E3782C
+    #  printf ' ≡'
+    #  set -l date_color CA1B00
+    #  printf ' %s' (date +"%Y-%m-%d")
+    #  set -l time_color 5FA701
+    #  printf ' %s' (date +"%H:%M:%S")
+    #  set -l normal_color normal
+    #  set -l right_prompt (echo_color -b $exit_color $exit_code)
+    #
+    #
+    ## display first line
+    #  echo  # blank line
+    #  echo -n $left_prompt
+    #  set_color -b $bg_color
+    #  printf "%-"$spaces"s" " "
+    #  echo $right_prompt
+    #
+    # Line 2
+    echo -n $vi_color'╰'
+    # support for virtual env name
+    if set -q VIRTUAL_ENV
+        echo -n "($turquoise"(basename "$VIRTUAL_ENV")"$white)"
+    end
+    #echo -n $white'─' $vi_color $__fish_prompt_char $normal
+    set -l c1 (set_color F54235)
+    set -l c2 (set_color FDEB61)
+    set -l c3 (set_color 9AE343)
+    set -l ar '➨'
+    set -l ar2 '➥'
+    #echo -n ' '$c1$ar$c2$ar$c3$ar
 
-  echo -n $vi_color$__fish_prompt_char $normal
+    echo -n $vi_color$__fish_prompt_char $normal
 
 end
 
 
 function fish_right_prompt
-  set -l exit_code $status
-  __tmux_prompt
-  if test $exit_code -ne 0
-    set_color red
-  else
+    set -l exit_code $status
+    __tmux_prompt
+    if test $exit_code -ne 0
+        set_color red
+    else
+        set_color 666666
+    end
+    printf '%d' $exit_code
     set_color 666666
-  end
-  printf '%d' $exit_code
-  set_color 666666
-  set_color E3782C
-  printf ' ≡'
-  set_color CA1B00
-  printf ' %s' (date +"%Y-%m-%d")
-  set_color 5FA701
-  printf ' %s' (date +"%H:%M:%S")
-  set_color normal
+    set_color E3782C
+    printf ' ≡'
+    set_color CA1B00
+    printf ' %s' (date +"%Y-%m-%d")
+    set_color 5FA701
+    printf ' %s' (date +"%H:%M:%S")
+    set_color normal
 end
 
 function __tmux_prompt
-  set multiplexer (_is_multiplexed)
+    set multiplexer (_is_multiplexed)
 
-  switch $multiplexer
-    case screen
-      set pane (_get_screen_window)
-    case tmux
-      set pane (_get_tmux_window)
-   end
+    switch $multiplexer
+        case screen
+            set pane (_get_screen_window)
+        case tmux
+            set pane (_get_tmux_window)
+    end
 
-  set_color 666666
-  if test -z $pane
-    echo -n ""
-  else
-    echo -n $pane' | '
-  end
+    set_color 666666
+    if test -z $pane
+        echo -n ""
+    else
+        echo -n $pane' | '
+    end
 end
 
 function _get_tmux_window
-  tmux lsw | grep active | sed 's/\*.*$//g;s/: / /1' | awk '{ print $2 "-" $1 }' -
+    tmux lsw | grep active | sed 's/\*.*$//g;s/: / /1' | awk '{ print $2 "-" $1 }' -
 end
 
 function _get_screen_window
-  set initial (screen -Q windows; screen -Q echo "")
-  set middle (echo $initial | sed 's/  /\n/g' | grep '\*' | sed 's/\*\$ / /g')
-  echo $middle | awk '{ print $2 "-" $1 }' -
+    set initial (screen -Q windows; screen -Q echo "")
+    set middle (echo $initial | sed 's/  /\n/g' | grep '\*' | sed 's/\*\$ / /g')
+    echo $middle | awk '{ print $2 "-" $1 }' -
 end
 
 function _is_multiplexed
-  set multiplexer ""
-  if test -z $TMUX
-  else
-    set multiplexer "tmux"
-  end
-  if test -z $WINDOW
-  else
-    set multiplexer "screen"
-  end
-  echo $multiplexer
+    set multiplexer ""
+    if test -z $TMUX
+    else
+        set multiplexer tmux
+    end
+    if test -z $WINDOW
+    else
+        set multiplexer screen
+    end
+    echo $multiplexer
 end
 
 
@@ -293,18 +293,18 @@ abbr -a gsw git switch
 set -x EDITOR nvim
 # set -x EDITOR emacsclient -c
 #abbr -a v nvim "conflict with vlang
-# abbr -a e "emacsclient -c -n"
+abbr -a e "emacsclient -c -n"
 abbr -a vim nvim
-abbr -a e nvim
+# abbr -a e nvim
 abbr -a vi nvim
 abbr -a m make
 
 function t
-  if test -d /Volumes/ramfs
-    cd /Volumes/ramfs
-  else if test -d /tmpfs
-    cd /tmpfs
-  end
+    if test -d /Volumes/ramfs
+        cd /Volumes/ramfs
+    else if test -d /tmpfs
+        cd /tmpfs
+    end
 end
 
 if status --is-interactive && not type -q rg
@@ -331,18 +331,28 @@ set -x HOMEBREW_NO_AUTO_UPDATE 1
 
 fish_add_path /usr/local/bin
 fish_add_path ~/.local/bin
-fish_add_path -p $HOME/.cargo/bin  # prepend
+fish_add_path -p $HOME/.cargo/bin # prepend
 
 fish_add_path ~/.emacs.d/bin
-fish_add_path /usr/local/opt/texinfo/bin
-fish_add_path /usr/local/opt/ruby/bin
-fish_add_path /usr/local/lib/ruby/gems/3.0.0/bin
-fish_add_path /usr/local/opt/python@3.10/bin
-fish_add_path /usr/local/opt/python@3.10/libexec/bin
 fish_add_path ~/.cargo/bin
+fish_add_path /opt/homebrew/opt/llvm/bin
+fish_add_path /opt/homebrew/opt/python/libexec/bin/
+fish_add_path /opt/homebrew/opt/ruby/bin
+
+set -gx LDFLAGS "-L/opt/homebrew/opt/ruby/lib"
+set -gx CPPFLAGS "-I/opt/homebrew/opt/ruby/include"
+set -gx PKG_CONFIG_PATH "/opt/homebrew/opt/ruby/lib/pkgconfig"
 
 if test -f ~/.emacs.d/emacs.fish
-   source ~/.emacs.d/emacs.fish
+    source ~/.emacs.d/emacs.fish
 end
 
 set -x XML_CATALOG_FILES /usr/local/etc/xml/catalog
+
+# bun
+set --export BUN_INSTALL "$HOME/.bun"
+set --export PATH $BUN_INSTALL/bin $PATH
+set --export GEMINI_API_KEY AIzaSyA-pbGfCzyZMnEX3bgDpeMXopFnYP69p4Y
+set --export ANTHROPIC_AUTH_TOKEN sk-VB3rUGf63Km6c1taxuoyLktsnZCNuczIR74coO5mljtMGkDv
+set --export ANTHROPIC_BASE_URL https://anyrouter.top
+
