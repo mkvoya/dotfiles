@@ -380,5 +380,3 @@ fish_add_path /Users/dongmk/.antigravity/antigravity/bin
 #     end
 # end
 # # <<< conda initialize <<<
-
-starship init fish | source
