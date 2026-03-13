@@ -38,16 +38,21 @@ end)
 -- window resizing
 hs.hotkey.bind(slavekey, "H", function()
     local win = hs.window.focusedWindow()
+    if not win then return end
     local f = win:frame()
     local screen = win:screen()
+    if not screen then return end
     local max = screen:frame()
+    local screenFrame = screen:frame()
 
-    f.x = max.x
-    f.y = max.y
-    f.w = max.w / 2
-    f.h = max.h
+    -- Use screen:frame() for window positioning, in case there are menu bars or docks present.
+    f.x = screenFrame.x
+    f.y = screenFrame.y
+    f.w = screenFrame.w / 2
+    f.h = screenFrame.h
     win:setFrame(f)
 end)
+
 hs.hotkey.bind(slavekey, "J", function()
     local win = hs.window.focusedWindow()
     local f = win:frame()
